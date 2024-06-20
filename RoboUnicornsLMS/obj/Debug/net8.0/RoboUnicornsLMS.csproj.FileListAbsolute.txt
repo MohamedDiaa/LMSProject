@@ -27,3 +27,4 @@ C:\Users\MDAlw\source\repos\LMSProject\RoboUnicornsLMS\obj\Debug\net8.0\refint\R
 C:\Users\MDAlw\source\repos\LMSProject\RoboUnicornsLMS\obj\Debug\net8.0\RoboUnicornsLMS.pdb
 C:\Users\MDAlw\source\repos\LMSProject\RoboUnicornsLMS\obj\Debug\net8.0\RoboUnicornsLMS.genruntimeconfig.cache
 C:\Users\MDAlw\source\repos\LMSProject\RoboUnicornsLMS\obj\Debug\net8.0\ref\RoboUnicornsLMS.dll
+C:\Users\MDAlw\source\repos\LMSProject\RoboUnicornsLMS\obj\Debug\net8.0\RoboUnicornsLMS.sourcelink.json

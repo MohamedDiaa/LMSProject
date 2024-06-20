@@ -1,7 +1,10 @@
-﻿namespace LMS.api.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LMS.api.Model
 {
     public class Module
     {
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
