@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\data\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\module.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\activity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +34,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LMSContext.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Data\\LMSContext.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Data\\LMSContext.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Data\\LMSContext.cs",
+              "RelativeToolTip": "..\\LMS.api\\Data\\LMSContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T09:28:34.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CoursesController.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\CoursesController.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\CoursesController.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\CoursesController.cs",
+              "RelativeToolTip": "..\\LMS.api\\Controllers\\CoursesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T09:27:23.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Program.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Program.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Program.cs",
+              "RelativeToolTip": "..\\LMS.api\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T09:07:33.009Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Document.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Document.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Document.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Document.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\Document.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:56:52.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Activity.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Activity.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Activity.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Activity.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\Activity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:56:37.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Module.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Module.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Module.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Module.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\Module.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:56:18.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Course.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Course.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Course.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Course.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\Course.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:55:56.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\User.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:55:40.165Z",
+              "EditorCaption": ""
             }
           ]
         }
