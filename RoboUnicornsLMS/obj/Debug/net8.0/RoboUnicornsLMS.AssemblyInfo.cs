@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RoboUnicornsLMS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d5b50a5d0b292c9fb8f90496814252a699d9104")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a29679879a4eb6d372f7ac053ab0762dfa5819c")]
 [assembly: System.Reflection.AssemblyProductAttribute("RoboUnicornsLMS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RoboUnicornsLMS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

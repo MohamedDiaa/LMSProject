@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboUnicornsLMS", "RoboUnicornsLMS.csproj", "{A4596E12-AAA3-414C-8F10-64278B0E6A2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMS.api", "..\LMS.api\LMS.api.csproj", "{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS.api", "..\LMS.api\LMS.api.csproj", "{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

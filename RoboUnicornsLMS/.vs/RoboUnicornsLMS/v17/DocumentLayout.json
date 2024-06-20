@@ -3,10 +3,33 @@
   "WorkspaceRootPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\robounicornslms\\components\\pages\\courses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|solutionrelative:components\\pages\\courses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\robounicornslms\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|solutionrelative:components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\robounicornslms\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|solutionrelative:components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\robounicornslms\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\robounicornslms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4596E12-AAA3-414C-8F10-64278B0E6A2F}|RoboUnicornsLMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\seed\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -19,9 +42,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\extensions\\webappextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\data\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -46,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,45 +75,71 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SeedData.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Seed\\SeedData.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
-              "RelativeToolTip": "..\\LMS.api\\Seed\\SeedData.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAIwBYAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T11:49:51.721Z",
+              "Title": "Error.razor",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Error.razor",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "Components\\Pages\\Error.razor",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T13:14:34.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\User.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs*",
-              "RelativeToolTip": "..\\LMS.api\\Model\\User.cs*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "Components\\_Imports.razor",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\_Imports.razor",
+              "RelativeToolTip": "Components\\_Imports.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T13:08:53.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T08:55:40.165Z",
+              "WhenOpened": "2024-06-20T12:51:38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "..\\LMS.api\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T12:19:07.523Z",
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Components\\Layout\\NavMenu.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T12:50:15.221Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "Courses.razor",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Pages\\Courses.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Courses.razor",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\Components\\Pages\\Courses.razor",
+              "RelativeToolTip": "Components\\Pages\\Courses.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T12:49:38.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "LMSContext.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Data\\LMSContext.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Data\\LMSContext.cs",
@@ -105,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "CoursesController.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\CoursesController.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\CoursesController.cs",
@@ -113,12 +159,11 @@
               "RelativeToolTip": "..\\LMS.api\\Controllers\\CoursesController.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAQwCgAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T09:27:23.065Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T09:27:23.065Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "20240620121336_make-course-optional-for-user.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620121336_make-course-optional-for-user.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Migrations\\20240620121336_make-course-optional-for-user.cs",
@@ -130,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "WebAppExtensions.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Extensions\\WebAppExtensions.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Extensions\\WebAppExtensions.cs",
@@ -142,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Module.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Module.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Module.cs",
@@ -154,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "Course.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Course.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Course.cs",
@@ -162,24 +207,59 @@
               "RelativeToolTip": "..\\LMS.api\\Model\\Course.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T08:55:56.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T08:55:56.495Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Program.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Program.cs",
               "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Program.cs",
               "RelativeToolTip": "..\\LMS.api\\Program.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAQwBsAAAAjAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAAcwCUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-20T09:07:33.009Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "..\\LMS.api\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T12:19:07.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Model\\User.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
+              "RelativeToolTip": "..\\LMS.api\\Model\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T08:55:40.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Seed\\SeedData.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
+              "RelativeToolTip": "..\\LMS.api\\Seed\\SeedData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAIwAgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T11:49:51.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "Activity.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Activity.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Activity.cs",
@@ -191,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Document.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Document.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Document.cs",

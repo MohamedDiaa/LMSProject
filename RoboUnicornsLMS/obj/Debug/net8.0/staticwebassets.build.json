@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "6VPgFeYEtYbnqlNakfluJpczvs/3su971kvP0LwotEY=",
+  "Hash": "cb7PxXE2ysbX4DMJPx8DWt3OR6xRxIUzWe2cNAN1vTQ=",
   "Source": "RoboUnicornsLMS",
   "BasePath": "_content/RoboUnicornsLMS",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj",
+      "Version": 2,
+      "Source": "LMS.api",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "RoboUnicornsLMS\\wwwroot",

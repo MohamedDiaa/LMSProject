@@ -1,0 +1,21 @@
+﻿@page "/Courses"
+@rendermode InteractiveServer
+@inject HttpClient HttpClient
+
+<PageTitle>Courses</PageTitle>
+
+
+<h3>Courses</h3>
+
+@code {
+    
+    List<Course> courses;
+
+    protected override async Task OnInitializedAsync()
+    {
+       // await HttpClient.GetAsync("/api/courses");
+
+       // courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
+    }
+    
+}
