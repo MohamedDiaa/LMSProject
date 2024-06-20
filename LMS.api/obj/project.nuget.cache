@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "HBe37wSRLvjBsIH8UvhFvZI1baJCyDaPT8m/hn4ZNYQiBLxuvNQ91VxXdM72x/9tItmqTSbKLj9sqt1VK0VxIA==",
+  "dgSpecHash": "+BpwMoo0K0/Ss1MwWi8kgQS80/SSjtVyluzFc4IL8lOBbyfVsrgnIDq0kSlFIPIj46AU7Sez+5icm/tf5tw7MQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MDAlw\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\MDAlw\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\MDAlw\\.nuget\\packages\\bogus\\35.5.1\\bogus.35.5.1.nupkg.sha512",
     "C:\\Users\\MDAlw\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\MDAlw\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\MDAlw\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

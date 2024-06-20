@@ -31,4 +31,6 @@ public class LMSContext : DbContext
                 new Course { Id = 3, Title = "Cooking", Description = "bla bla" }
             );
     }
+
+public DbSet<LMS.api.Model.User> User { get; set; } = default!;
 }

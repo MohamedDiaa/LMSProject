@@ -251,3 +251,4 @@ C:\Users\MDAlw\source\repos\LMSProject\LMS.api\obj\Debug\net8.0\refint\LMS.api.d
 C:\Users\MDAlw\source\repos\LMSProject\LMS.api\obj\Debug\net8.0\LMS.api.pdb
 C:\Users\MDAlw\source\repos\LMSProject\LMS.api\obj\Debug\net8.0\LMS.api.genruntimeconfig.cache
 C:\Users\MDAlw\source\repos\LMSProject\LMS.api\obj\Debug\net8.0\ref\LMS.api.dll
+C:\Users\MDAlw\source\repos\LMSProject\LMS.api\bin\Debug\net8.0\Bogus.dll

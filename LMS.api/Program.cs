@@ -1,3 +1,4 @@
+using LMS.api.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -5,7 +6,7 @@ namespace LMS.api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<LMSContext>(options =>
@@ -26,11 +27,11 @@ namespace LMS.api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            await app.SeedDataAsync();
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
