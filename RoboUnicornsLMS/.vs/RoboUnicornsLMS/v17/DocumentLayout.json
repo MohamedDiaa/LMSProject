@@ -3,31 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\migrations\\20240620122017_change-user-name-to-fname-and-lname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620122352_split-name.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\seed\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\extensions\\webappextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\model\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}|..\\LMS.api\\LMS.api.csproj|c:\\users\\mdalw\\source\\repos\\lmsproject\\lms.api\\data\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -52,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,58 +55,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "20240620122352_split-name.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620122352_split-name.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Migrations\\20240620122352_split-name.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620122352_split-name.cs",
-              "RelativeToolTip": "..\\LMS.api\\Migrations\\20240620122352_split-name.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T12:23:52.71Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "SeedData.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Seed\\SeedData.cs",
               "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Seed\\SeedData.cs",
               "RelativeToolTip": "..\\LMS.api\\Seed\\SeedData.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAmwBsAAAAJAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAIwBYAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-20T11:49:51.721Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\User.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs",
-              "RelativeToolTip": "..\\LMS.api\\Model\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\User.cs*",
+              "RelativeToolTip": "..\\LMS.api\\Model\\User.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-20T08:55:40.165Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20240620122017_change-user-name-to-fname-and-lname.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620122017_change-user-name-to-fname-and-lname.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Migrations\\20240620122017_change-user-name-to-fname-and-lname.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620122017_change-user-name-to-fname-and-lname.cs",
-              "RelativeToolTip": "..\\LMS.api\\Migrations\\20240620122017_change-user-name-to-fname-and-lname.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAqAAAA",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "..\\LMS.api\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T12:20:17.307Z",
+              "WhenOpened": "2024-06-20T12:19:07.523Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "LMSContext.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Data\\LMSContext.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Data\\LMSContext.cs",
@@ -124,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "CoursesController.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\CoursesController.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\CoursesController.cs",
@@ -137,7 +118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "20240620121336_make-course-optional-for-user.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Migrations\\20240620121336_make-course-optional-for-user.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Migrations\\20240620121336_make-course-optional-for-user.cs",
@@ -150,18 +131,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "..\\LMS.api\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "..\\LMS.api\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T12:19:07.523Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "WebAppExtensions.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Extensions\\WebAppExtensions.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Extensions\\WebAppExtensions.cs",
@@ -173,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "Module.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Module.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Module.cs",
@@ -185,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "Course.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Course.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Course.cs",
@@ -193,11 +162,12 @@
               "RelativeToolTip": "..\\LMS.api\\Model\\Course.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T08:55:56.495Z"
+              "WhenOpened": "2024-06-20T08:55:56.495Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Program.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Program.cs",
@@ -209,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "Activity.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Activity.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Activity.cs",
@@ -221,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Document.cs",
               "DocumentMoniker": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\Model\\Document.cs",
               "RelativeDocumentMoniker": "..\\LMS.api\\Model\\Document.cs",

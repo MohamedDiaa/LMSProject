@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LMS.api.Model
 {
@@ -15,6 +16,7 @@ namespace LMS.api.Model
         
         public int? CourseID { get; set; }
 
+        [JsonIgnore]
         public Course? Course { get; set; }
     }
 }

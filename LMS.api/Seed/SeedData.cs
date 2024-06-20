@@ -17,11 +17,8 @@ namespace LMS.api.Seed
 
             faker = new Faker("sv");
 
-            var students = GenerateStudents(50);
+            var students = GenerateStudents(50);            
             await context.AddRangeAsync(students);
-
-            //var courses = GenerateCourses(20);
-          //  await context.AddRangeAsync(students);
 
             await context.SaveChangesAsync();
 
@@ -40,6 +37,13 @@ namespace LMS.api.Seed
             return courses;
         }
 
+        private static Course GenerateACourse()
+        {
+                var title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(faker.Company.Bs());
+                return new Course { Title = title , Description = "a Course"};
+        }
+
+
         private static IEnumerable<User> GenerateStudents(int numberOfStudents)
         {
             var students = new List<User>();
@@ -50,8 +54,14 @@ namespace LMS.api.Seed
                 var fName = faker.Name.FirstName();
                 var lName = faker.Name.LastName();
                 var email = faker.Internet.Email(fName, lName, "lexicon.se");
+                var course = GenerateACourse();
 
-                var student = new User { FirstName = fName, LastName = lName, Email = email, Password = "123" };
+                var student = new User {
+                    FirstName = fName,
+                    LastName = lName,
+                    Email = email, 
+                    Password = "123",
+                    Course = course };
            
                 students.Add(student);
             }
