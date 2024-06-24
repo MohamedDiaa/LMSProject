@@ -6,7 +6,7 @@
 
 
 <h3>Courses</h3>
-<p> @foreach (Module x in modules)
+<p> @foreach (Course x in courses)
     {
         <p>@x.Title</p>
 
@@ -15,18 +15,13 @@
 @code {
 
     List<Course> courses = new();
-    List<Module> modules = new();
-    List<Activity> activity = new();
-
+ 
     protected override async Task OnInitializedAsync()
     {
        // await HttpClient.GetAsync("/api/courses");
 
        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
 
-        modules = await HttpClient.GetFromJsonAsync<List<Module>>("/api/Modules") ?? new();
-        
-        activity = await HttpClient.GetFromJsonAsync<List<Activity>>("/api/Activities") ?? new();
 
     }
     
