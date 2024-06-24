@@ -12,6 +12,8 @@ namespace LMS.api.Model
         public string LastName { get; set; }
 
         public string Email { get; set; }
+
+        [JsonIgnore]
         public string Password { get; set; }
         
         public int? CourseID { get; set; }

@@ -103,5 +103,20 @@ namespace LMS.api.Controllers
         {
             return _context.Activity.Any(e => e.Id == id);
         }
+
+        // GET: api/Activities/Module/5
+        [HttpGet("Module/{id}")]
+        public async Task<ActionResult<IEnumerable<Activity>>> GetActivitiesByModuleID(int id)
+        {
+            var @activties = await _context.Activity.Where(m => m.ModuleID == id).ToListAsync();
+
+            if (activties == null)
+            {
+                return NotFound();
+            }
+
+            return activties;
+        }
+
     }
 }
