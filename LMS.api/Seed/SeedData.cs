@@ -41,7 +41,8 @@ namespace LMS.api.Seed
                 var course = new Course {
                     Title = title,
                     Description = title,
-                    Modules = GenerateModules(random.Next(1, 4)).ToList()
+                    Modules = GenerateModules(random.Next(1, 4)).ToList(),
+                    MaxCapcity = random.Next(20, 100)
             };
                 courses.Add(course);
             }
