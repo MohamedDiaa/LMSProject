@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "cb7PxXE2ysbX4DMJPx8DWt3OR6xRxIUzWe2cNAN1vTQ=",
+  "Hash": "XaqREKK0AN6gwe3RHUOpKmIc5Det425AS+8Ii/HaxgQ=",
   "Source": "RoboUnicornsLMS",
   "BasePath": "_content/RoboUnicornsLMS",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\LMS.api\\LMS.api.csproj",
       "Version": 2,
       "Source": "LMS.api",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -22,17 +22,17 @@
     {
       "Name": "RoboUnicornsLMS\\wwwroot",
       "Source": "RoboUnicornsLMS",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\RoboUnicornsLMS.styles.css",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\RoboUnicornsLMS.styles.css",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "RoboUnicornsLMS.styles.css",
       "AssetKind": "All",
@@ -45,13 +45,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\RoboUnicornsLMS.styles.css"
+      "OriginalItemSpec": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\bundle\\RoboUnicornsLMS.styles.css"
     },
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RoboUnicornsLMS.bundle.scp.css",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RoboUnicornsLMS.bundle.scp.css",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "RoboUnicornsLMS.bundle.scp.css",
       "AssetKind": "All",
@@ -64,13 +64,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RoboUnicornsLMS.bundle.scp.css"
+      "OriginalItemSpec": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RoboUnicornsLMS.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\app.css",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\app.css",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -86,10 +86,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -105,10 +105,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -124,10 +124,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\favicon.png",
+      "Identity": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\favicon.png",
       "SourceId": "RoboUnicornsLMS",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
+      "ContentRoot": "D:\\Arbetsmarknadsutbildning\\Projektarbete\\LMSProject\\RoboUnicornsLMS\\wwwroot\\",
       "BasePath": "_content/RoboUnicornsLMS",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
