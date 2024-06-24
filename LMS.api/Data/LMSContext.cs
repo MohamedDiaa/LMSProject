@@ -33,4 +33,8 @@ public class LMSContext : DbContext
     }
 
 public DbSet<LMS.api.Model.User> User { get; set; } = default!;
+
+public DbSet<LMS.api.Model.Module> Module { get; set; } = default!;
+
+public DbSet<LMS.api.Model.Activity> Activity { get; set; } = default!;
 }
