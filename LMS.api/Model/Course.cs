@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LMS.api.Model
 {
@@ -13,8 +15,10 @@ namespace LMS.api.Model
 
         public DateTime End { get; set; }
 
+        [JsonIgnore] 
         public ICollection<User> Students { get; set; }
-
+       
+        [JsonIgnore]
         public ICollection<Module> Modules { get; set; }
 
     }

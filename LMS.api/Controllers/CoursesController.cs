@@ -104,5 +104,25 @@ namespace LMS.api.Controllers
         {
             return _context.Course.Any(e => e.Id == id);
         }
+
+        // GET: api/Users/5
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult<Course>> GetCourseForUser(int id)
+        {
+            var user = await _context.User.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _context.Course.FindAsync(user.CourseID);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return course;
+        }
     }
 }

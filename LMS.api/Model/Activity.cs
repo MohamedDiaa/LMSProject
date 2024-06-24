@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LMS.api.Model
 {
@@ -16,6 +17,7 @@ namespace LMS.api.Model
         public DateTime End { get; set; }
         public int ModuleID { get; set; }
 
+        [JsonIgnore]
         public Module Module { get; set; }
         
     }
