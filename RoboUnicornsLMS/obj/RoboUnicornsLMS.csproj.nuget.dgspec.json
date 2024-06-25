@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\RoboUnicorns\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj": {}
+    "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj": {}
   },
   "projects": {
-    "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\LMS.api.csproj": {
+    "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\LMS.api.csproj",
+        "projectUniqueName": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj",
         "projectName": "LMS.api",
-        "projectPath": "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\LMS.api.csproj",
-        "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\obj\\",
+        "projectPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj",
+        "packagesPath": "C:\\Users\\MDAlw\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\MDAlw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -100,25 +95,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Code\\RoboUnicorns\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj": {
+    "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\RoboUnicorns\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj",
+        "projectUniqueName": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj",
         "projectName": "RoboUnicornsLMS",
-        "projectPath": "D:\\Code\\RoboUnicorns\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj",
-        "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\RoboUnicorns\\LMSProject\\RoboUnicornsLMS\\obj\\",
+        "projectPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\RoboUnicornsLMS.csproj",
+        "packagesPath": "C:\\Users\\MDAlw\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\RoboUnicornsLMS\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\MDAlw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -126,15 +117,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\LMS.api.csproj": {
-                "projectPath": "D:\\Code\\RoboUnicorns\\LMSProject\\LMS.api\\LMS.api.csproj"
+              "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj": {
+                "projectPath": "C:\\Users\\MDAlw\\source\\repos\\LMSProject\\LMS.api\\LMS.api.csproj"
               }
             }
           }
@@ -172,7 +162,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
