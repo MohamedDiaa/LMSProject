@@ -13,7 +13,7 @@ namespace LMS.api.Model
 
         public string Email { get; set; }
 
-        [JsonIgnore]
+       // [JsonIgnore]
         public string Password { get; set; }
         
         public int? CourseID { get; set; }
