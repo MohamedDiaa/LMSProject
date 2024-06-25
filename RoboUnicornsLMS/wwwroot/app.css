@@ -3,6 +3,11 @@ html, body {
     background-color: #494949;
 }
 
+h2 {
+    color: #23B0FF;
+    margin:3rem;
+}
+
 a, .btn-link {
     color: #006bb7;
 }
