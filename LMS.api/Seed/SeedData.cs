@@ -40,7 +40,7 @@ namespace LMS.api.Seed
                 var title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(faker.Company.Bs());
                 var course = new Course {
                     Title = title,
-                    Description = title,
+                    Description = faker.Lorem.Sentences(),
                     Modules = GenerateModules(random.Next(1, 4)).ToList(),
                     MaxCapcity = random.Next(20, 100)
             };
