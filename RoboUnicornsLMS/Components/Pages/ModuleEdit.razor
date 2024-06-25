@@ -1,10 +1,13 @@
-﻿@page "/course/{CourseId:int}/moduleedit/{ModuleId:int}"
+﻿@page "/moduleedit/{ModuleId:int}"
 @using LMS.api.Model
 @inject HttpClient HttpClient
+@rendermode InteractiveServer
 
 <h3>Edit Module</h3>
 
-<EditForm Model="@ModuleToEdit" FormName="EditModuleForm">
+<EditForm Model="@ModuleToEdit" FormName="EditModuleForm" 
+    OnValidSubmit="HandleValidSubmit"
+    method="post">
     <div class="mb-3">
         <label class="form-label">Title</label>
         <InputText class="form-control" @bind-Value="@ModuleToEdit.Title" placeholder="Enter title" />
@@ -25,9 +28,14 @@
         <InputDate class="form-control" @bind-Value="@ModuleToEdit.End" placeholder="Enter end date"></InputDate>
     </div>
 
-@*     <div class="mb-3">
-        <InputSelect @bind-Value="@ModuleToEdit.CourseID"></InputSelect>
-    </div> *@
+    <div class="mb-3">
+        <InputSelect @bind-Value="@ModuleToEdit.CourseID">
+            @foreach(var course in Courses)
+            {
+                <option value="@course.Id">@course.Title</option>
+            }
+        </InputSelect>
+    </div>
 
     <button type="submit" class="btn btn-accept">Save</button>
 </EditForm>
@@ -40,21 +48,28 @@
     [SupplyParameterFromForm]
     public Module ModuleToEdit { get; set; } = new Module();
 
+    public List<Course> Courses { get; set; } = [];
+
     protected override async Task OnInitializedAsync()
     {
         ModuleToEdit = await HttpClient.GetFromJsonAsync<Module>($"/api/modules/{ModuleId}");
+        Courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses/");
     }
 
-    private async Task OnSubmit()
+    protected async Task HandleValidSubmit()
     {
         var postBody = new
         {
+            Id = ModuleId,
             Title = ModuleToEdit.Title,
             Description = ModuleToEdit.Description,
             Start = ModuleToEdit.Start,
-            End = ModuleToEdit.End
+            End = ModuleToEdit.End,
+            CourseId = ModuleToEdit.CourseID
         };
 
         await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
     }
+
+    // Todo: Add handling for invalid submit and display validation errors on form
 }

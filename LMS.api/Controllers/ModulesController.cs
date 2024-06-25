@@ -93,6 +93,12 @@ namespace LMS.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Module>> PostModule(Module @module)
         {
+            var @course = await _context.Course.FirstOrDefaultAsync(c => c.Id == module.CourseID);
+            if (@course == null)
+            {
+                return NotFound();
+            }
+
             _context.Module.Add(@module);
             await _context.SaveChangesAsync();
 

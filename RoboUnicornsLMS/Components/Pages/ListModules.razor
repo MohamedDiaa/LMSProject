@@ -22,12 +22,15 @@
             <td>
                 <p>@x.Description</p>
             </td>
-                <td>
-                    <p>@x.Start.ToShortDateString()</p>
-                </td>
-                <td>
-                    <p>@x.End.ToShortDateString()</p>
-                </td
+            <td>
+                <p>@x.Start.ToShortDateString()</p>
+            </td>
+            <td>
+                <p>@x.End.ToShortDateString()</p>
+            </td>
+            <td>
+                <a href="@($"moduleedit/{x.Id}")" class="btn btn-primary">Edit</a>
+            </td>
         </tr>
     }
     </tbody>
