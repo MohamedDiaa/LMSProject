@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Pages\Counter.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LMS.api\LMS.api.csproj" />
   </ItemGroup>
 
