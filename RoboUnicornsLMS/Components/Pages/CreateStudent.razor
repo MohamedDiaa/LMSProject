@@ -68,16 +68,13 @@ function myFunction() {
        
 </form>
 
-<div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-    <div id="myDropdown" class="dropdown-content">
-        @foreach (var course in courses)
-        {
-            <a href="#contact">@course.Title</a>
-        }
-
-    </div>
-</div>
+<select @bind = "@SelectedCourseId">
+    @foreach(var course in courses){
+        <option value="@course.Id">@course.Title </option>
+   
+    }
+    
+</select>
 
 <input type="submit" value="Submit" onclick=@CreateUser>
 
@@ -87,6 +84,7 @@ function myFunction() {
     String Fname;
     String Lname;
     String Email;
+    int SelectedCourseId;
 
     protected override async Task OnInitializedAsync()
     {
@@ -101,13 +99,14 @@ function myFunction() {
     {
         var user = new User
             {
-               
+
                 FirstName = Fname,
                 LastName = Lname,
                 Email = Email,
                 Password = "123",
-                CourseID = 10
+                CourseID = SelectedCourseId
             };
+
         await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
     }
 
