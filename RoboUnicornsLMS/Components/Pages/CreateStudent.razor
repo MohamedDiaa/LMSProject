@@ -1,0 +1,113 @@
+﻿@page "/CreateStudent"
+@rendermode InteractiveServer
+@inject HttpClient HttpClient
+
+<head>
+<style>
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+</style>
+</head>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+
+</script>
+
+<h3>Create Student</h3>
+<form>
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname" @bind-value="Lname"><br><br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" @bind-value="Email"><br><br>
+       
+</form>
+
+<select @bind = "@SelectedCourseId">
+    @foreach(var course in courses){
+        <option value="@course.Id">@course.Title </option>
+   
+    }
+    
+</select>
+
+<input type="submit" value="Submit" onclick=@CreateUser>
+
+@code {
+
+    List<Course> courses = new();
+    String Fname;
+    String Lname;
+    String Email;
+    int SelectedCourseId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await HttpClient.GetAsync("/api/courses");
+
+        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
+
+
+    }
+
+    public async Task CreateUser()
+    {
+        var user = new User
+            {
+
+                FirstName = Fname,
+                LastName = Lname,
+                Email = Email,
+                Password = "123",
+                CourseID = SelectedCourseId
+            };
+
+        await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+    }
+
+}

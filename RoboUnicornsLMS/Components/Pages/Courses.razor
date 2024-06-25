@@ -6,24 +6,23 @@
 
 
 <h3>Courses</h3>
-<p> @foreach (Course course in courses)
+<p> @foreach (Course x in courses)
     {
-        <p>@course.Title</p>
+        <p>@x.Title</p>
 
     }
 </p>
 @code {
 
-    List<Course> courses = new List<Course>
-    {
-            
-    };
-
+    List<Course> courses = new();
+ 
     protected override async Task OnInitializedAsync()
     {
        // await HttpClient.GetAsync("/api/courses");
 
        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
+
+
     }
     
 }

@@ -1,0 +1,60 @@
+﻿@page "/course/{CourseId:int}/moduleedit/{ModuleId:int}"
+@using LMS.api.Model
+@inject HttpClient HttpClient
+
+<h3>Edit Module</h3>
+
+<EditForm Model="@ModuleToEdit" FormName="EditModuleForm">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <InputText class="form-control" @bind-Value="@ModuleToEdit.Title" placeholder="Enter title" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <InputTextArea class="form-control" @bind-Value="@ModuleToEdit.Description" rows="3"  placeholder="Enter description"></InputTextArea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Start date</label>
+        <InputDate class="form-control" @bind-Value="@ModuleToEdit.Start" placeholder="Enter start date"></InputDate>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">End date</label>
+        <InputDate class="form-control" @bind-Value="@ModuleToEdit.End" placeholder="Enter end date"></InputDate>
+    </div>
+
+@*     <div class="mb-3">
+        <InputSelect @bind-Value="@ModuleToEdit.CourseID"></InputSelect>
+    </div> *@
+
+    <button type="submit" class="btn btn-accept">Save</button>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public int ModuleId { get; set; }
+
+    [SupplyParameterFromForm]
+    public Module ModuleToEdit { get; set; } = new Module();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ModuleToEdit = await HttpClient.GetFromJsonAsync<Module>($"/api/modules/{ModuleId}");
+    }
+
+    private async Task OnSubmit()
+    {
+        var postBody = new
+        {
+            Title = ModuleToEdit.Title,
+            Description = ModuleToEdit.Description,
+            Start = ModuleToEdit.Start,
+            End = ModuleToEdit.End
+        };
+
+        await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
+    }
+}

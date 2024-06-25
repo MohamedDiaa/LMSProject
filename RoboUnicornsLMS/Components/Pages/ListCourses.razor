@@ -1,0 +1,50 @@
+﻿@page "/ListCourses"
+@rendermode InteractiveServer
+@inject HttpClient HttpClient
+
+<PageTitle>Courses</PageTitle>
+
+
+<h3>Courses</h3>
+<table>
+
+    <tr>
+        <th>@nameof(Course.Title)</th>
+        <th>@nameof(Course.Description)</th>
+    </tr>
+    <tbody>
+    @foreach (Course x in courses)
+    {
+        <tr>
+            <td>
+                <p>@x.Title</p>
+            </td>
+            <td>
+                <p>@x.Description</p>
+            </td>
+                <td>
+                    <p>@x.Start.ToShortDateString()</p>
+                </td>
+                <td>
+                    <p>@x.End.ToShortDateString()</p>
+                </td
+                <td>
+                   <a href="/ListModules/@x.Id" class="button">Module</a>
+                </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@code {
+
+    List<Course> courses = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await HttpClient.GetAsync("/api/courses");
+
+        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
+
+    }
+
+}

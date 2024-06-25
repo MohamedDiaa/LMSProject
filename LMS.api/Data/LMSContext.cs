@@ -24,13 +24,11 @@ public class LMSContext : DbContext
         modelBuilder.Entity<Activity>().HasOne(a => a.Module)
             .WithMany(m => m.Activities)
             .HasForeignKey(a => a.ModuleID);
-
-        modelBuilder.Entity<Course>().HasData(
-                new Course { Id = 1, Title ="Dot net 2024", Description = "bla bla" },
-                new Course { Id = 2, Title = "JS", Description = "bla bla" },
-                new Course { Id = 3, Title = "Cooking", Description = "bla bla" }
-            );
-    }
+  }
 
 public DbSet<LMS.api.Model.User> User { get; set; } = default!;
+
+public DbSet<LMS.api.Model.Module> Module { get; set; } = default!;
+
+public DbSet<LMS.api.Model.Activity> Activity { get; set; } = default!;
 }
