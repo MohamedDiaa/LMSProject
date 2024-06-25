@@ -7,6 +7,10 @@ hr {
 }
 
 nav {
+    border-top: 1px solid #23B0FF;
+}
+
+header {
     background-color: #2E2E2E;
    
 }
