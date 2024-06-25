@@ -1,10 +1,9 @@
 ﻿footer {
     border-top: 1px solid #23B0FF;
     background-color: #2E2E2E;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
+    position: relative;
+
+  
 }
 
 
