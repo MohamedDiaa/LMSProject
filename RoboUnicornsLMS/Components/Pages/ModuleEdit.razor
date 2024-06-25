@@ -29,7 +29,7 @@
     </div>
 
     <div class="mb-3">
-        <InputSelect @bind-Value="@ModuleToEdit.CourseID">
+        <InputSelect class="form-select" @bind-Value="@ModuleToEdit.CourseID">
             @foreach(var course in Courses)
             {
                 <option value="@course.Id">@course.Title</option>
@@ -37,7 +37,9 @@
         </InputSelect>
     </div>
 
-    <button type="submit" class="btn btn-accept">Save</button>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
 </EditForm>
 
 @code {
