@@ -14,7 +14,8 @@ namespace LMS.api.Data
 
             builder.HasMany(c => c.Students)
                 .WithOne(c => c.Course)
-                .HasForeignKey(c => c.CourseID);
+                .HasForeignKey(c => c.CourseID)
+                .OnDelete(DeleteBehavior.SetNull);
 
 
             builder.HasMany(c => c.Modules)
