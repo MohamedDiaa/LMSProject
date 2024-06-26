@@ -106,12 +106,19 @@
     }
 
 
-
-
-
-<div class="mb-3">
+@if (currentView == "Modules")
+{
+  <div class="mb-3">
     <a href="@($"course/{courseId}/moduleadd")" class="btn btn-primary">Add New Module</a>
-</div>
+    </div>
+} else if (currentView == "Participants")
+{
+    <div class="mb-3">
+        <a class="btn btn-primary">Add New Participant</a>
+    </div>
+}
+
+
 
 
 @code {
