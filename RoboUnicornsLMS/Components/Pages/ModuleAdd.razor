@@ -9,22 +9,22 @@
 
     <div class="mb-3">
         <label class="form-label">Title</label>
-        <InputText class="form-control" @bind-Value="@ModuleToAdd.Title" placeholder="Enter title" />
+        <InputText class="form-control" @bind-Value="@FormModel.Title" placeholder="Enter title" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Description</label>
-        <InputTextArea rows="3" class="form-control" @bind-Value="@ModuleToAdd.Description" placeholder="Enter description"></InputTextArea>
+        <InputTextArea rows="3" class="form-control" @bind-Value="@FormModel.Description" placeholder="Enter description"></InputTextArea>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Start date</label>
-        <InputDate class="form-control" @bind-Value="@ModuleToAdd.Start" placeholder="Enter start date" />
+        <InputDate class="form-control" @bind-Value="@FormModel.Start" placeholder="Enter start date" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">End date</label>
-        <InputDate class="form-control" @bind-Value="@ModuleToAdd.End" placeholder="Enter end date"></InputDate>
+        <InputDate class="form-control" @bind-Value="@FormModel.End" placeholder="Enter end date"></InputDate>
     </div>
 
     <div class="mb-3">
@@ -37,21 +37,21 @@
     public int CourseId { get; set; }
 
     [SupplyParameterFromForm]
-    private Module ModuleToAdd { get; set; }
+    private ModuleDTO FormModel { get; set; }
 
     protected override void OnInitialized()
     {
-        ModuleToAdd ??= new Module();
+        FormModel ??= new ModuleDTO();
     }
 
     private async Task OnSubmit()
     {
         var postBody = new
         {
-            Title = ModuleToAdd.Title,
-            Description = ModuleToAdd.Description,
-            Start = ModuleToAdd.Start,
-            End = ModuleToAdd.End,
+            Title = FormModel.Title,
+            Description = FormModel.Description,
+            Start = FormModel.Start,
+            End = FormModel.End,
             CourseId = CourseId
         };
 

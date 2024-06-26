@@ -5,31 +5,31 @@
 
 <h3>Edit Module</h3>
 
-<EditForm Model="@ModuleToEdit" FormName="EditModuleForm" 
+<EditForm Model="@FormModel" FormName="EditModuleForm" 
     OnValidSubmit="HandleValidSubmit"
     method="post">
     <div class="mb-3">
         <label class="form-label">Title</label>
-        <InputText class="form-control" @bind-Value="@ModuleToEdit.Title" placeholder="Enter title" />
+        <InputText class="form-control" @bind-Value="@FormModel.Title" placeholder="Enter title" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Description</label>
-        <InputTextArea class="form-control" @bind-Value="@ModuleToEdit.Description" rows="3"  placeholder="Enter description"></InputTextArea>
+        <InputTextArea class="form-control" @bind-Value="@FormModel.Description" rows="3"  placeholder="Enter description"></InputTextArea>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Start date</label>
-        <InputDate class="form-control" @bind-Value="@ModuleToEdit.Start" placeholder="Enter start date"></InputDate>
+        <InputDate class="form-control" @bind-Value="@FormModel.Start" placeholder="Enter start date"></InputDate>
     </div>
 
     <div class="mb-3">
         <label class="form-label">End date</label>
-        <InputDate class="form-control" @bind-Value="@ModuleToEdit.End" placeholder="Enter end date"></InputDate>
+        <InputDate class="form-control" @bind-Value="@FormModel.End" placeholder="Enter end date"></InputDate>
     </div>
 
     <div class="mb-3">
-        <InputSelect class="form-select" @bind-Value="@ModuleToEdit.CourseID">
+        <InputSelect class="form-select" @bind-Value="@FormModel.CourseID">
             @foreach(var course in Courses)
             {
                 <option value="@course.Id">@course.Title</option>
@@ -48,13 +48,13 @@
     public int ModuleId { get; set; }
 
     [SupplyParameterFromForm]
-    public Module ModuleToEdit { get; set; } = new Module();
+    public ModuleDTO FormModel { get; set; } = new ModuleDTO();
 
     public List<Course> Courses { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
-        ModuleToEdit = await HttpClient.GetFromJsonAsync<Module>($"/api/modules/{ModuleId}");
+        FormModel = await HttpClient.GetFromJsonAsync<ModuleDTO>($"/api/modules/{ModuleId}");
         Courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses/");
     }
 
@@ -63,11 +63,11 @@
         var postBody = new
         {
             Id = ModuleId,
-            Title = ModuleToEdit.Title,
-            Description = ModuleToEdit.Description,
-            Start = ModuleToEdit.Start,
-            End = ModuleToEdit.End,
-            CourseId = ModuleToEdit.CourseID
+            Title = FormModel.Title,
+            Description = FormModel.Description,
+            Start = FormModel.Start,
+            End = FormModel.End,
+            CourseId = FormModel.CourseID
         };
 
         await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);

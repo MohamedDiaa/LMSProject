@@ -1,3 +1,4 @@
+using LMS.api.Configurations;
 using LMS.api.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ namespace LMS.api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(ModuleMappings));
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
