@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
 using LMS.api.Extensions;
+using LMS.api.DTO;
+using System.Globalization;
 
 namespace LMS.api.Controllers
 {
@@ -45,12 +47,33 @@ namespace LMS.api.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, UpdateCourse updateCourse)
         {
-            if (id != course.Id)
+            if (id != updateCourse.Id)
             {
                 return BadRequest();
             }
+
+            var course = await _context.Course.FindAsync(id);
+
+            if (!String.IsNullOrEmpty(updateCourse.Title)) {
+                course.Title = updateCourse.Title;
+            }
+            if(!String.IsNullOrEmpty(updateCourse.Description)) {
+                course.Description = updateCourse.Description;
+            }
+            if (updateCourse.MaxCapcity is int maxCapcity) {
+                course.MaxCapcity = maxCapcity;
+            }
+            if (updateCourse.Start is DateTime start)
+            {
+                course.Start = start;
+            }
+            if (updateCourse.End is DateTime end)
+            {
+                course.End = end;
+            }
+
 
             _context.Entry(course).State = EntityState.Modified;
 

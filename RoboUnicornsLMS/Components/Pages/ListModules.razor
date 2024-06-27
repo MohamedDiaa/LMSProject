@@ -65,6 +65,9 @@
             <td>
                 <a href="@($"moduleedit/{x.Id}")" class="btn btn-primary">Edit</a>
             </td>
+            <td>
+                <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(x.Id)">Delete</button>
+            </td>
         </tr>
     }
     </tbody>
@@ -145,6 +148,9 @@
     </div>
 }
 
+<ConfirmationDialog @ref="DeleteDialog" ConfirmedChanged="ConfirmDelete_Click" 
+    ConfirmationTitle="Delete Module"
+    ConfirmationMessage=@($"Do you want to delete module with ID {moduleId}?") />
 
 
 
@@ -152,6 +158,8 @@
 
     [Parameter]
     public int courseId { get; set; }
+
+    private int moduleId { get; set; }
 
     public string courseTitle = "Loading...";
 
@@ -162,6 +170,9 @@
 
     [SupplyParameterFromForm]
     public CourseDTO FormModel { get; set; } = new CourseDTO();
+
+    public RoboUnicornsLMS.Components.ConfirmationDialog DeleteDialog { get; set; }
+
 
 
 
@@ -251,7 +262,22 @@
         }
     }
 
-    
+    protected void OpenDeleteDialog(int targetId)
+    {
+        moduleId = targetId;
+        DeleteDialog.ShowDialog();
+    }
 
-
+    protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+    {
+        if (deleteConfirmed)
+        {
+            var response = await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
+            if (response.IsSuccessStatusCode)
+            {
+                //Remove the deleted module from the list so it disappears from the UI
+                modules.Remove(modules.Single(m => m.Id == moduleId));
+            }
+        }
+    }
 }

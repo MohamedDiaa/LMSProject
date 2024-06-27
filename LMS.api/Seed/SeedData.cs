@@ -42,8 +42,10 @@ namespace LMS.api.Seed
                     Title = title,
                     Description = faker.Lorem.Sentences(),
                     Modules = GenerateModules(random.Next(1, 4)).ToList(),
-                    MaxCapcity = random.Next(20, 100)
-            };
+                    MaxCapcity = random.Next(20, 100),
+                    Start = DateTime.Now.AddDays(random.Next(-100, -10)),
+                    End = DateTime.Now.AddDays(random.Next(10, 100))
+                };
                 courses.Add(course);
             }
             return courses;
