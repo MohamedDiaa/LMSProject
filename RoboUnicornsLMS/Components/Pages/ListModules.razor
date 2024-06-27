@@ -51,15 +51,15 @@
     {
         <tr>
             <td>
-                <p>@x.Title</p>
+                        <p style="min-width:250px">@x.Title</p>
             </td>
             <td>
                 <p>@x.Description</p>
             </td>
-            <td>
+                    <td style="width:100px">
                 <p>@x.Start.ToShortDateString()</p>
             </td>
-            <td>
+                    <td style="width:100px">
                 <p>@x.End.ToShortDateString()</p>
             </td>
             <td>
@@ -157,8 +157,9 @@
 @code {
 
     [Parameter]
+    public int userId { get; set; }
+    [Parameter]
     public int courseId { get; set; }
-
     private int moduleId { get; set; }
 
     public string courseTitle = "Loading...";
@@ -178,6 +179,7 @@
 
     protected override async Task OnInitializedAsync()
     {  
+      
         await LoadParticipantsDataAsync();
         await LoadModulesDataAsync();
         await LoadCourseDataAsync();
@@ -199,11 +201,16 @@
 
 
 
+  
     private async Task LoadParticipantsDataAsync()
     {
         try
         {
-            participants = await HttpClient.GetFromJsonAsync<List<User>>($"/api/Courses/User/{courseId}") ?? new List<User>();
+            var allUsers = await HttpClient.GetFromJsonAsync<List<User>>("/api/users");
+            if (allUsers != null)
+            {
+                participants = allUsers.Where(u => u.CourseID == courseId).ToList();
+            }
         }
         catch (Exception ex)
         {

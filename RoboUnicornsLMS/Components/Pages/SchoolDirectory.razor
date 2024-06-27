@@ -24,6 +24,7 @@
             <th scope="col">Email</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
 
     </tr>
     </thead>
@@ -64,6 +65,7 @@
     private ConfirmationDialog DeleteDialog;
     private int UserIdToDelete;
     private string UserNameToDelete;
+    public string courseTitle = "Loading...";
 
     protected override async Task OnInitializedAsync()
     {
@@ -106,5 +108,7 @@
             }
         }
     }
+
+
 
 }
