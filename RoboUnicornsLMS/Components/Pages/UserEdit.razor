@@ -73,11 +73,11 @@
         var response = await HttpClient.PutAsJsonAsync($"/api/users/{UserId}", postBody);
         if (response.IsSuccessStatusCode)
         {
-            // Handle success (e.g., navigate to a different page or show a success message)
+            // Success action
         }
         else
         {
-            // Handle error (e.g., show an error message)
+            // Error action
         }
     }
 }

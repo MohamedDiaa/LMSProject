@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (User u in courses)
+    @foreach (User u in users)
     {
         <tr>
             <td>
@@ -37,23 +37,64 @@
                     <a href="@($"useredit/{u.Id}")" class="btn btn-primary">Edit</a>
                 </td>
                 <td style="width: 100px">
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(u.Id, u.FirstName, u.LastName)">Delete</button>
                 </td>
         </tr>
     }
     </tbody>
 </table>
 
+<ConfirmationDialog @ref="DeleteDialog" ConfirmedChanged="ConfirmDelete_Click"
+                    ConfirmationTitle="Delete user?"
+                    ConfirmationMessage=@($"Are you sure you want to delete {UserNameToDelete}?") />
+
 @code {
 
-    List<User> courses = new();
+    private List<User> users = new();
+    private ConfirmationDialog DeleteDialog;
+    private int UserIdToDelete;
+    private string UserNameToDelete;
 
     protected override async Task OnInitializedAsync()
     {
-        // await HttpClient.GetAsync("/api/courses");
+        users = await HttpClient.GetFromJsonAsync<List<User>>("/api/users") ?? new();
+    }
 
-        courses = await HttpClient.GetFromJsonAsync<List<User>>("/api/users") ?? new();
+    private void OpenDeleteDialog(int userId, string firstName, string lastName)
+    {
+        UserIdToDelete = userId;
+        UserNameToDelete = $"{firstName} {lastName}";
+        DeleteDialog.ShowDialog();
+    }
 
+    private async Task ConfirmDelete_Click(bool confirmed)
+    {
+        if (confirmed)
+        {
+            try
+            {
+                var response = await HttpClient.DeleteAsync($"/api/users/{UserIdToDelete}");
+                if (response.IsSuccessStatusCode)
+                {
+                    // Remove the user from the list
+                    var user = users.FirstOrDefault(u => u.Id == UserIdToDelete);
+                    if (user != null)
+                    {
+                        users.Remove(user);
+                    }
+                }
+                else
+                {
+                    // Handle failure
+                    Console.WriteLine($"Error deleting user: {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                Console.WriteLine($"Exception deleting user: {ex.Message}");
+            }
+        }
     }
 
 }
