@@ -1,0 +1,59 @@
+﻿@page "/SchoolDirectory"
+@rendermode InteractiveServer
+@inject HttpClient HttpClient
+
+<div class="container text-center">
+    <h2>School Directory</h2>
+</div>
+
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (User u in courses)
+    {
+        <tr>
+            <td>
+                <p>@u.FirstName</p>
+            </td>
+            <td>
+                <p>@u.LastName</p>
+            </td>
+                <td>
+                    <p>@u.Email</p>
+                </td>
+                <td>
+                    <p>@u.Course</p>
+                </td>
+                <td style="width: 80px">
+                    <a href="@($"useredit/{u.Id}")" class="btn btn-primary">Edit</a>
+                </td>
+                <td style="width: 100px">
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+
+    List<User> courses = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await HttpClient.GetAsync("/api/courses");
+
+        courses = await HttpClient.GetFromJsonAsync<List<User>>("/api/users") ?? new();
+
+    }
+
+}

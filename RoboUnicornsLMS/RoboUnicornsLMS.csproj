@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Content Remove="Components\Pages\Counter.razor" />
+    <Content Remove="Components\Pages\Courses.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Pages\SchoolDirectory.css" />
   </ItemGroup>
 
   <ItemGroup>

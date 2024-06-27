@@ -1,0 +1,83 @@
+﻿@page "/useredit/{UserId:int}"
+@using LMS.api.Model
+@inject HttpClient HttpClient
+@rendermode InteractiveServer
+
+<div class="container text-center">
+    <h2>Edit user</h2>
+</div>
+
+<EditForm Model="@FormModel" FormName="EditModuleForm"
+          OnValidSubmit="HandleValidSubmit"
+          method="post">
+    <div class="mb-3">
+        <label class="form-label">First name</label>
+        <InputText class="form-control" @bind-Value="@FormModel.FirstName" placeholder="Enter first name" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Last name</label>
+        <InputText class="form-control" @bind-Value="@FormModel.LastName" placeholder="Enter last name"></InputText>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <InputText class="form-control" @bind-Value="@FormModel.Email" placeholder="Enter Email"></InputText>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <InputText class="form-control" @bind-Value="@FormModel.Password" placeholder="Enter Password"></InputText>
+    </div>
+
+    <div class="mb-3">
+        <InputSelect class="form-select" @bind-Value="@FormModel.CourseID">
+            @foreach (var course in Courses)
+            {
+                <option value="@course.Id">@course.Title</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+
+    public User FormModel { get; set; } = new User();
+
+    public List<Course> Courses { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        FormModel = await HttpClient.GetFromJsonAsync<User>($"/api/users/{UserId}");
+        Courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses/");
+    }
+
+    protected async Task HandleValidSubmit()
+    {
+        var postBody = new
+        {
+            Id = UserId,
+            FirstName = FormModel.FirstName,
+            LastName = FormModel.LastName,
+            Email = FormModel.Email,
+            Password = FormModel.Password,
+            CourseID = FormModel.CourseID
+        };
+
+        var response = await HttpClient.PutAsJsonAsync($"/api/users/{UserId}", postBody);
+        if (response.IsSuccessStatusCode)
+        {
+            // Handle success (e.g., navigate to a different page or show a success message)
+        }
+        else
+        {
+            // Handle error (e.g., show an error message)
+        }
+    }
+}
