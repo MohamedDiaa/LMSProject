@@ -222,7 +222,7 @@
             var response = await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
             if (response.IsSuccessStatusCode)
             {
-                //Remove the deleted module from the list so it disappears from the UI
+                // Remove the deleted module from the list so it disappears from the UI
                 modules.Remove(modules.Single(m => m.Id == moduleId));
             }
         }
