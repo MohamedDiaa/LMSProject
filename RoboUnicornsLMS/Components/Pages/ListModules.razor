@@ -92,9 +92,9 @@
   @foreach (var user in participants)
                 {
                     <tr>
-                      <td><p>@user.FirstName</p></td>
+                    <td><p>@user.FirstName @user.LastName</p></td>
                         <td><p>@user.Email</p></td>
-                       
+                        <td><p>Undefined</p></td>
                     </tr>
                 }
     
