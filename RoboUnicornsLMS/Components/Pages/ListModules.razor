@@ -135,12 +135,12 @@
     private int moduleId { get; set; }
 
     public string courseTitle = "Loading...";
-    
+
     private string currentView = "Modules";  // Default view
 
     List<Module> modules = new();
     List<User> participants = new();
-    
+
     public RoboUnicornsLMS.Components.ConfirmationDialog DeleteDialog { get; set; }
 
 
@@ -201,7 +201,7 @@
             Console.WriteLine($"Error loading course: {ex.Message}");
         }
     }
- 
+
 
 
     private void SetView(string view)
@@ -219,7 +219,12 @@
     {
         if (deleteConfirmed)
         {
-            await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
+            var response = await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
+            if (response.IsSuccessStatusCode)
+            {
+                //Remove the deleted module from the list so it disappears from the UI
+                modules.Remove(modules.Single(m => m.Id == moduleId));
+            }
         }
     }
 }
