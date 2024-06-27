@@ -1,6 +1,7 @@
 ﻿@page "/course/{CourseId:int}/moduleadd"
 @using LMS.api.Model
 @inject HttpClient HttpClient
+@inject IToastService toastService
 
 <h3>Add New Module</h3>
 
@@ -55,6 +56,11 @@
             CourseId = CourseId
         };
 
-        await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        var response = await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        if (response.IsSuccessStatusCode)
+        {
+            // toastService.ShowSuccess(response);
+            // NavigationManager.
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/ListModules/{courseId:int}"
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
+@inject IToastService toastService
 
 <PageTitle>Modules</PageTitle>
 
@@ -224,6 +225,7 @@
             {
                 // Remove the deleted module from the list so it disappears from the UI
                 modules.Remove(modules.Single(m => m.Id == moduleId));
+                toastService.ShowInfo($"Module with ID {moduleId} successfully deleted at: {DateTime.Now}");
             }
         }
     }
