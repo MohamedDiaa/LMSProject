@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LMS.api.DTO;
 using LMS.api.Model;
 
 namespace LMS.api.Configurations

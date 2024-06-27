@@ -7,7 +7,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7183") });
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:7183"),
+    Timeout = TimeSpan.FromMinutes(5)
+});
 
 var app = builder.Build();
 

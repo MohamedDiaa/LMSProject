@@ -1,0 +1,58 @@
+﻿@page "/Register"
+@using LMS.api.ViewModel
+@rendermode InteractiveServer
+@inject NavigationManager navigation
+@inject HttpClient HttpClient
+
+<h1>User Registration</h1>
+
+<div class="Container" style="position: fixed; left: 50%;transform: translate(-50%, 0%)">
+
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" @bind-value=@EmailParam>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" @bind-value=@PasswordParam>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" @bind-value=@ConfirmPasswordParam>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary" @onclick=@onSubmit>Submit</button>
+    </form>
+</div>
+
+
+@code {
+
+    public string EmailParam { get; set; }
+    public string PasswordParam { get; set; }
+    public string ConfirmPasswordParam { get; set; }
+
+    public async void onSubmit()
+    {
+
+        RegisterViewModel viewModel = new RegisterViewModel
+            {
+                Email = EmailParam,
+                Password = PasswordParam,
+                ConfirmPassword = ConfirmPasswordParam
+            };
+
+        var client = new HttpClient
+        {
+            BaseAddress = HttpClient.BaseAddress,
+            Timeout = TimeSpan.FromMinutes(5)
+        };
+        await client.PostAsJsonAsync<RegisterViewModel>("api/Account/register", viewModel);
+
+    }
+}

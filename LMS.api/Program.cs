@@ -1,5 +1,6 @@
 using LMS.api.Configurations;
 using LMS.api.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +22,10 @@ namespace LMS.api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAutoMapper(typeof(ModuleMappings));
-            
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<LMSContext>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -34,6 +38,7 @@ namespace LMS.api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

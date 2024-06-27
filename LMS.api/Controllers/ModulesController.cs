@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
 using AutoMapper;
+using LMS.api.DTO;
 
 namespace LMS.api.Controllers
 {

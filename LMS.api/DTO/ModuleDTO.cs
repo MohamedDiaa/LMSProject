@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using LMS.api.Model;
 
-namespace LMS.api.Model
+namespace LMS.api.DTO
 {
     public class ModuleDTO
     {
