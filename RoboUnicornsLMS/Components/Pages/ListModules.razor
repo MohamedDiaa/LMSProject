@@ -65,6 +65,9 @@
             <td>
                 <a href="@($"moduleedit/{x.Id}")" class="btn btn-primary">Edit</a>
             </td>
+            <td>
+                <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(x.Id)">Delete</button>
+            </td>
         </tr>
     }
     </tbody>
@@ -118,6 +121,9 @@
     </div>
 }
 
+<ConfirmationDialog @ref="DeleteDialog" ConfirmedChanged="ConfirmDelete_Click" 
+    ConfirmationTitle="Delete Module"
+    ConfirmationMessage=@($"Do you want to delete module with ID {moduleId}?") />
 
 
 
@@ -126,6 +132,8 @@
     [Parameter]
     public int courseId { get; set; }
 
+    private int moduleId { get; set; }
+
     public string courseTitle = "Loading...";
     
     private string currentView = "Modules";  // Default view
@@ -133,7 +141,8 @@
     List<Module> modules = new();
     List<User> participants = new();
     
-   
+    public RoboUnicornsLMS.Components.ConfirmationDialog DeleteDialog { get; set; }
+
 
 
 
@@ -142,11 +151,11 @@
         await LoadParticipantsDataAsync();
         await LoadModulesDataAsync();
         await LoadCourseDataAsync();
-            
-        
+
+
     }
 
-       private async Task LoadModulesDataAsync()
+    private async Task LoadModulesDataAsync()
     {
         try
         {
@@ -160,7 +169,7 @@
 
 
 
-      private async Task LoadParticipantsDataAsync()
+    private async Task LoadParticipantsDataAsync()
     {
         try
         {
@@ -172,7 +181,7 @@
         }
     }
 
-        private async Task LoadCourseDataAsync()
+    private async Task LoadCourseDataAsync()
     {
         try
         {
@@ -192,13 +201,25 @@
             Console.WriteLine($"Error loading course: {ex.Message}");
         }
     }
-
-
  
+
+
     private void SetView(string view)
     {
         currentView = view;
     }
 
+    protected void OpenDeleteDialog(int targetId)
+    {
+        moduleId = targetId;
+        DeleteDialog.ShowDialog();
+    }
 
+    protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+    {
+        if (deleteConfirmed)
+        {
+            await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
+        }
+    }
 }
