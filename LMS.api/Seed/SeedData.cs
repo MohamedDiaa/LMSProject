@@ -16,13 +16,13 @@ namespace LMS.api.Seed
         public static async Task InitAsync(LMSContext context)
         {
 
-           if (await context.User.AnyAsync()) return;
+            if (await context.User.AnyAsync()) return;
 
             faker = new Faker("sv");
 
             courses = GenerateCourses(60);
 
-            var students = GenerateStudents(1000);            
+            var students = GenerateStudents(1000);
             await context.AddRangeAsync(students);
 
             await context.SaveChangesAsync();
@@ -31,14 +31,15 @@ namespace LMS.api.Seed
 
         private static IEnumerable<Course> GenerateCourses(int numberOfCourses)
         {
-            
+
             var courses = new List<Course>();
 
             for (int i = 0; i < numberOfCourses; i++)
             {
-              
+
                 var title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(faker.Company.Bs());
-                var course = new Course {
+                var course = new Course
+                {
                     Title = title,
                     Description = faker.Lorem.Sentences(),
                     Modules = GenerateModules(random.Next(1, 4)).ToList(),
@@ -68,7 +69,7 @@ namespace LMS.api.Seed
                     Description = faker.Lorem.Sentences(),
                     Start = DateTime.Now,
                     End = DateTime.Now.AddDays(random.Next(0, 100)),
-                    Activities = GenerateActivities(random.Next(1,5)).ToList()
+                    Activities = GenerateActivities(random.Next(1, 5)).ToList()
                 };
                 modules.Add(module);
             }
@@ -107,13 +108,15 @@ namespace LMS.api.Seed
                 var email = faker.Internet.Email(fName, lName, "lexicon.se");
                 var course = SelectACourse();
 
-                var student = new User {
+                var student = new User
+                {
                     FirstName = fName,
                     LastName = lName,
-                    Email = email, 
+                    Email = email,
                     Password = "123",
-                    Course = course };
-           
+                    Course = course
+                };
+
                 students.Add(student);
             }
 

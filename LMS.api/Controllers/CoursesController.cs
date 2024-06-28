@@ -40,7 +40,7 @@ namespace LMS.api.Controllers
             {
                 return NotFound();
             }
-           
+
             return course;
         }
 
@@ -56,13 +56,16 @@ namespace LMS.api.Controllers
 
             var course = await _context.Course.FindAsync(id);
 
-            if (!String.IsNullOrEmpty(updateCourse.Title)) {
+            if (!String.IsNullOrEmpty(updateCourse.Title))
+            {
                 course.Title = updateCourse.Title;
             }
-            if(!String.IsNullOrEmpty(updateCourse.Description)) {
+            if (!String.IsNullOrEmpty(updateCourse.Description))
+            {
                 course.Description = updateCourse.Description;
             }
-            if (updateCourse.MaxCapcity is int maxCapcity) {
+            if (updateCourse.MaxCapcity is int maxCapcity)
+            {
                 course.MaxCapcity = maxCapcity;
             }
             if (updateCourse.Start is DateTime start)
