@@ -1,4 +1,9 @@
-﻿      <header>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using RoboUnicornsLMS.Services
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+      <header>
             <div class="container">
                 <h1 class="display-4 robo">ROBO UNICORNS </h1>
             </div>
@@ -25,8 +30,52 @@
                     @* TODO: ADD PROPER PAGE/LINK FOR SCHOOL DIRECTORY. THE VIEW FOR ALL STUDENTS. *@
                     </NavLink>
                 </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Account/Manage" Match="NavLinkMatch.All">Profile</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Account/Manage/Email">Email</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Account/Manage/ChangePassword">Password</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Account/Manage/TwoFactorAuthentication">Two-factor authentication</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Account/Manage/PersonalData">Personal data</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <EditForm @onsubmit="Logout" Context="logoutForm">
+                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            </EditForm>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Identity/Account/Login">Login</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Identity/Account/Register">Register</NavLink>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
             </ul>
        
     </div>
 </nav>
 </header>
+
+<button @onclick="Logout">Log out</button>
+
+@code {
+    private void Logout()
+    {
+        if (AuthenticationStateProvider is CustomAuthenticationStateProvider customAuthStateProvider)
+        {
+            customAuthStateProvider.NotifyUserLogout();
+        }
+    }
+}
