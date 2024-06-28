@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row align-items-center mb-3">
         <div class="col">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="CourseAdd">
                 <span class="add-course"> <i class="bi bi-plus-circle"></i>Add course</span>
             </NavLink>
         </div>
@@ -33,7 +33,7 @@
     {
         <tr>
             <td>
-                <p>@x.Title</p>
+                <p style="min-width:250px">@x.Title</p>
             </td>
             <td>
                 <p>@x.Description</p>
@@ -45,7 +45,7 @@
                     <p>@x.End.ToShortDateString()</p>
                 </td
                 <td>
-                   <a href="/ListModules/@x.Id" class="button">View</a>
+                   <a href="/ListModules/@x.Id" class="btn btn-primary">View</a>
                 </td>
         </tr>
     }
