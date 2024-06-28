@@ -1,7 +1,7 @@
 ﻿@page "/CreateUser"
 @rendermode InteractiveServer
-@inject HttpClient HttpClient
-
+@inject ICourseRequestService CourseRequestService
+@inject IApplicationUserRequestService UserRequestService
 <div class="container">
     <div class="row justify-content-start">
         <div class="col-md-6">
@@ -48,7 +48,7 @@
     private string StatusMessage { get; set; }
     private string StatusMessageClass { get; set; }
 
-    private List<Course> courses = new();
+    private IEnumerable<Course> courses =[];
     private string Fname;
     private string Lname;
     private string Email;
@@ -56,30 +56,36 @@
 
     protected override async Task OnInitializedAsync()
     {
-        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
+        courses = await CourseRequestService.GetAsync();
     }
 
     private async Task CreateUser()
     {
-        var user = new User
-        {
-            FirstName = Fname,
-            LastName = Lname,
-            Email = Email,
-            Password = "123",
-            CourseID = SelectedCourseId
-        };
 
-        var response = await HttpClient.PostAsJsonAsync("/api/Users", user);
+        var user = new ApplicationUser
+            {
+
+                FirstName = Fname,
+                LastName = Lname,
+                Email = Email,
+                PasswordHash = "123",
+                CourseID = SelectedCourseId
+            };
+
+
+
+        var response = await UserRequestService.CreateAsync(user);
         if (response.IsSuccessStatusCode)
         {
             StatusMessage = "User successfully created!";
             StatusMessageClass = "alert-success";
+
             // Reset form
             Fname = string.Empty;
             Lname = string.Empty;
             Email = string.Empty;
             SelectedCourseId = 0;
+            user = new ApplicationUser(); // Reset form
         }
         else
         {

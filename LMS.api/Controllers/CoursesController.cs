@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using LMS.api.Data;
+using LMS.api.DTO;
+using LMS.api.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LMS.api.Model;
-using LMS.api.Extensions;
-using LMS.api.DTO;
-using System.Globalization;
 
 namespace LMS.api.Controllers
 {
@@ -16,11 +11,13 @@ namespace LMS.api.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private readonly LMSContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CoursesController(LMSContext context)
+        public CoursesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Courses
@@ -40,7 +37,7 @@ namespace LMS.api.Controllers
             {
                 return NotFound();
             }
-           
+
             return course;
         }
 
@@ -56,13 +53,16 @@ namespace LMS.api.Controllers
 
             var course = await _context.Course.FindAsync(id);
 
-            if (!String.IsNullOrEmpty(updateCourse.Title)) {
+            if (!String.IsNullOrEmpty(updateCourse.Title))
+            {
                 course.Title = updateCourse.Title;
             }
-            if(!String.IsNullOrEmpty(updateCourse.Description)) {
+            if (!String.IsNullOrEmpty(updateCourse.Description))
+            {
                 course.Description = updateCourse.Description;
             }
-            if (updateCourse.MaxCapcity is int maxCapcity) {
+            if (updateCourse.MaxCapcity is int maxCapcity)
+            {
                 course.MaxCapcity = maxCapcity;
             }
             if (updateCourse.Start is DateTime start)
@@ -73,7 +73,6 @@ namespace LMS.api.Controllers
             {
                 course.End = end;
             }
-
 
             _context.Entry(course).State = EntityState.Modified;
 
@@ -113,15 +112,15 @@ namespace LMS.api.Controllers
         public async Task<ActionResult<CourseDTO>> PostCourse(CourseDTO courseDto)
         {
 
-            
+
             var course = new Course
             {
                 Title = courseDto.Title,
                 Description = courseDto.Description,
-                MaxCapcity = courseDto.MaxCapcity,
+                MaxCapcity = courseDto.maxCapcity,
                 Start = courseDto.Start,
                 End = courseDto.End,
-         
+
             };
 
             _context.Course.Add(course);
@@ -132,7 +131,7 @@ namespace LMS.api.Controllers
             {
                 Title = course.Title,
                 Description = course.Description,
-                MaxCapcity = course.MaxCapcity,
+                maxCapcity = course.MaxCapcity,
                 Start = course.Start,
                 End = course.End
             };
@@ -163,9 +162,9 @@ namespace LMS.api.Controllers
 
         // GET: api/Users/5
         [HttpGet("User/{id}")]
-        public async Task<ActionResult<Course>> GetCourseForUser(int id)
+        public async Task<ActionResult<Course>> GetCourseForUser(string id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {

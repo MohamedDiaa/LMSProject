@@ -9,6 +9,7 @@ namespace LMS.api.Configurations
         public ActivityMappings()
         {
             CreateMap<ActivityCreateDTO, Activity>();
+
             CreateMap<ActivityUpdateDTO, Activity>();
         }
     }

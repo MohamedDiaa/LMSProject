@@ -1,7 +1,9 @@
 ﻿
 using Bogus;
 using Bogus.DataSets;
+using LMS.api.Data;
 using LMS.api.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
@@ -9,36 +11,51 @@ namespace LMS.api.Seed
 {
     public class SeedData
     {
-
-        public static Faker faker;
-        private static IEnumerable<Course> courses;
+        public static Faker faker = new Faker("sv");
+        private static IEnumerable<Course>? courses;
         private static Random random = new Random();
-        public static async Task InitAsync(LMSContext context)
+
+        public static async Task InitAsync(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager)
         {
+            if (context.Course.Any()) // Check if there are any courses
+            {
+                return;
+            }
 
-           if (await context.User.AnyAsync()) return;
+            var roles = new List<ApplicationRole>
+            {
+                new ApplicationRole { Name = ApplicationRole.Admin },
+                new ApplicationRole { Name = ApplicationRole.Teacher },
+                new ApplicationRole { Name = ApplicationRole.Student }
+            };
 
-            faker = new Faker("sv");
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role.Name))
+                {
+                    await roleManager.CreateAsync(role);
+                }
+            }
 
             courses = GenerateCourses(60);
+            await context.Course.AddRangeAsync(courses); // Add generated courses to the context
+            await context.SaveChangesAsync(); // Save changes to the database
 
-            var students = GenerateStudents(1000);            
-            await context.AddRangeAsync(students);
-
-            await context.SaveChangesAsync();
-
+            await GenerateStudentsAsync(1000, userManager);
         }
 
         private static IEnumerable<Course> GenerateCourses(int numberOfCourses)
         {
-            
             var courses = new List<Course>();
 
             for (int i = 0; i < numberOfCourses; i++)
             {
-              
                 var title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(faker.Company.Bs());
-                var course = new Course {
+                var course = new Course
+                {
                     Title = title,
                     Description = faker.Lorem.Sentences(),
                     Modules = GenerateModules(random.Next(1, 4)).ToList(),
@@ -50,12 +67,14 @@ namespace LMS.api.Seed
             }
             return courses;
         }
+
         private static Course SelectACourse()
         {
-            int next = random.Next(0, courses.Count());
-            return courses.ElementAt(next);
+            int next = random.Next(0, courses?.Count() ?? 0); // Use null-conditional operator
+            return courses?.ElementAt(next); // Use null-conditional operator
         }
 
+        // Other methods remain unchanged
         private static IEnumerable<Module> GenerateModules(int numberOfModules)
         {
             var modules = new List<Module>();
@@ -68,7 +87,7 @@ namespace LMS.api.Seed
                     Description = faker.Lorem.Sentences(),
                     Start = DateTime.Now,
                     End = DateTime.Now.AddDays(random.Next(0, 100)),
-                    Activities = GenerateActivities(random.Next(1,5)).ToList()
+                    Activities = GenerateActivities(random.Next(1, 5)).ToList()
                 };
                 modules.Add(module);
             }
@@ -95,30 +114,31 @@ namespace LMS.api.Seed
             return activities;
         }
 
-        private static IEnumerable<User> GenerateStudents(int numberOfStudents)
+        private static async Task GenerateStudentsAsync(int numberOfStudents, UserManager<ApplicationUser> userManager)
         {
-            var students = new List<User>();
-
             for (int i = 0; i < numberOfStudents; i++)
             {
-                var avatar = faker.Internet.Avatar();
                 var fName = faker.Name.FirstName();
                 var lName = faker.Name.LastName();
                 var email = faker.Internet.Email(fName, lName, "lexicon.se");
                 var course = SelectACourse();
 
-                var student = new User {
+                var user = new ApplicationUser
+                {
+                    UserName = email,
+                    Email = email,
                     FirstName = fName,
                     LastName = lName,
-                    Email = email, 
-                    Password = "123",
-                    Course = course };
-           
-                students.Add(student);
+                    Course = course
+                };
+
+                var result = await userManager.CreateAsync(user, "DefaultPassword123!");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, ApplicationRole.Student);
+                }
             }
-
-            return students;
         }
-
     }
 }

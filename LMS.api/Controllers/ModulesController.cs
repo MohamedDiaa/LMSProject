@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
 using AutoMapper;
+using LMS.api.Data;
 
 namespace LMS.api.Controllers
 {
@@ -14,11 +15,11 @@ namespace LMS.api.Controllers
     [ApiController]
     public class ModulesController : ControllerBase
     {
-        private readonly LMSContext _context;
+        private readonly ApplicationDbContext _context;
 
         private readonly IMapper _mapper;
 
-        public ModulesController(LMSContext context, IMapper mapper)
+        public ModulesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -105,7 +106,7 @@ namespace LMS.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Module>> PostModule(ModuleDTO @module)
         {
-            var @course = await _context.Course.FindAsync(@module.CourseID);
+            var @course = await _context.Course.FindAsync(@module.CourseId);
             if (@course == null)
             {
                 return NotFound();
