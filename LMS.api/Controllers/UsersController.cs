@@ -46,7 +46,7 @@ namespace LMS.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.Id)
+            if (id.Equals(user.Id))
             {
                 return BadRequest();
             }
@@ -101,7 +101,7 @@ namespace LMS.api.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.User.Any(e => e.Id.Equals(id));
         }
     }
 }

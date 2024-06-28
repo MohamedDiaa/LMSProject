@@ -2,13 +2,8 @@
 
 namespace LMS.api.Model
 {
-    public class Role : IdentityRole<int>, IEntity
+    public class Role : ApplicationRole, IEntity<string>
     {
-        public
-            Role(string roleName) : base(roleName)
-        {
-        }
-
         public static string Admin => "Admin";
         public static string Teacher => "Teacher";
 

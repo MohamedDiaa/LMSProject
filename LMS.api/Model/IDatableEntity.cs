@@ -1,6 +1,6 @@
 ﻿namespace LMS.api.Model
 {
-    public interface IDatableEntity : IEntity
+    public interface IDatableEntity : IEntity<int>
     {
         DateTime LastModified { get; set; }
         DateTime Start { get; set; }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboUnicornsLMS", "RoboUnic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS.api", "..\LMS.api\LMS.api.csproj", "{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "C:\Users\ulfbo.UFFE\source\repos\BlazorApp1\BlazorApp1\WebApplication1\WebApplication1.csproj", "{750D430A-4312-4E71-B74D-EFB4E80D84F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3929669-BBAE-4491-B6B1-8B1AB7E93B5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{750D430A-4312-4E71-B74D-EFB4E80D84F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{750D430A-4312-4E71-B74D-EFB4E80D84F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{750D430A-4312-4E71-B74D-EFB4E80D84F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{750D430A-4312-4E71-B74D-EFB4E80D84F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

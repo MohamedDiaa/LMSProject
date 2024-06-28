@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using RoboUnicornsLMS.Components.Account.Pages;
 using RoboUnicornsLMS.Components.Account.Pages.Manage;
-using RoboUnicornsLMS.Data;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace Microsoft.AspNetCore.Routing
+namespace RoboUnicornsLMS.Components.Account
 {
     public static class IdentityComponentsEndpointRouteBuilderExtensions
     {

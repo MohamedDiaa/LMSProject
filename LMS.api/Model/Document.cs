@@ -1,7 +1,7 @@
 ﻿
 namespace LMS.api.Model
 {
-    public class Document : IEntity
+    public class Document : IEntity<int>
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }

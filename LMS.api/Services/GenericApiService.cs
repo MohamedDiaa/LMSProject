@@ -6,7 +6,10 @@ namespace LMS.api.Services
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class GenericApiService<TEntity> : IGenericApiService<TEntity> where TEntity : class, IEntity
+    public class GenericApiService<TEntity, TKey>
+        : IGenericApiService<TEntity, TKey>
+        where TEntity : class, IEntity<TKey>
+        where TKey : notnull
     {
         private readonly LMSContext _context;
         private readonly DbSet<TEntity> _dbSet;

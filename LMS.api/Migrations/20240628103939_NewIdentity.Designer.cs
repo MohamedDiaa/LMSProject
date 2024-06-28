@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS.api.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    [Migration("20240627191410_identity")]
-    partial class identity
+    [Migration("20240628103939_NewIdentity")]
+    partial class NewIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -48,7 +48,7 @@ namespace LMS.api.Migrations
                     b.Property<int>("ModuleID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -77,7 +77,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -90,7 +90,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -120,13 +120,13 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -140,13 +140,32 @@ namespace LMS.api.Migrations
                     b.ToTable("Module");
                 });
 
+            modelBuilder.Entity("LMS.api.Model.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
             modelBuilder.Entity("LMS.api.Model.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -159,6 +178,11 @@ namespace LMS.api.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -213,6 +237,24 @@ namespace LMS.api.Migrations
                     b.HasIndex("CourseID");
 
                     b.ToTable("User");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("LMS.api.Model.Student", b =>
+                {
+                    b.HasBaseType("LMS.api.Model.User");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("LMS.api.Model.Teacher", b =>
+                {
+                    b.HasBaseType("LMS.api.Model.User");
+
+                    b.HasDiscriminator().HasValue("Teacher");
                 });
 
             modelBuilder.Entity("LMS.api.Model.Activity", b =>

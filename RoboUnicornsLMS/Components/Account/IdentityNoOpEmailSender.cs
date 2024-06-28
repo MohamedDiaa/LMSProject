@@ -1,7 +1,6 @@
 using LMS.api.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using RoboUnicornsLMS.Data;
 
 namespace RoboUnicornsLMS.Components.Account
 {
