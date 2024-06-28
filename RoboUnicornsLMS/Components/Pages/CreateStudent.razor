@@ -18,13 +18,22 @@ function myFunction() {
 </div>
 <form>
     <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
+        <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
     <label for="lname">Last name:</label>
     <input type="text" id="lname" name="lname" @bind-value="Lname"><br><br>
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" @bind-value="Email"><br><br>
+
        
 </form>
+<form class="form-floating">
+    <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
+    <label for="floatingInputValue">Input with value</label>
+</form>
+<div class="form-floating">
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+    <label for="floatingTextarea">Comments</label>
+</div>
 
 <select @bind = "@SelectedCourseId">
     @foreach(var course in courses){
