@@ -2,46 +2,49 @@
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
 
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
-// Close the dropdown if the user clicks outside of it
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-md-6">
+            <form class="form-floating mb-3">
+                <h3>Create User</h3>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="fname" name="fname" @bind-value="Fname" placeholder="First name">
+        <label for="fname" class="text-primary">First name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="lname" name="lname" @bind-value="Lname" placeholder="Last name">
+        <label for="lname" class="text-primary">Last name</label>
+    </div>
 
-</script>
-
-<h3>Create User</h3>
-<form>
-    <label for="fname">First name:</label>
-        <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname" @bind-value="Lname"><br><br>
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" @bind-value="Email"><br><br>
-
-       
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control @EmailValidationClass" id="email" @bind="Email" placeholder="name@example.com">
+        <label for="email" class="text-primary">Email</label>
+        @if (!IsValidEmail(Email))
+        {
+            <div class="invalid-feedback">
+                Please enter a valid email address.
+            </div>
+        }
+    </div>
+    <div class="form-floating mb-3">
+        <select class="form-select" id="course" @bind="SelectedCourseId" aria-label="Floating label select example">
+            <option value="0" selected>Select a course</option>
+            @foreach (var course in courses)
+            {
+                <option value="@course.Id">@course.Title</option>
+            }
+        </select>
+        <label for="email" class="text-primary">Course</label>
+        
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" @onclick="CreateUser">Submit</button>
+    </div>
 </form>
-<form class="form-floating">
-    <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
-    <label for="floatingInputValue">Input with value</label>
-</form>
-<div class="form-floating">
-    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-    <label for="floatingTextarea">Comments</label>
 </div>
-
-<select @bind = "@SelectedCourseId">
-    @foreach(var course in courses){
-        <option value="@course.Id">@course.Title </option>
-   
-    }
-    
-</select>
-
-<input type="submit" value="Submit" onclick=@CreateUser>
+</div>
+</div>
 
 @code {
 
@@ -50,6 +53,7 @@ function myFunction() {
     String Lname;
     String Email;
     int SelectedCourseId;
+    string EmailValidationClass = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,7 +68,6 @@ function myFunction() {
     {
         var user = new User
             {
-
                 FirstName = Fname,
                 LastName = Lname,
                 Email = Email,
@@ -72,7 +75,28 @@ function myFunction() {
                 CourseID = SelectedCourseId
             };
 
-        await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        var response = await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+
+        if (response.IsSuccessStatusCode)
+        {
+            // Handle success
+        }
+        else
+        {
+            // Handle error
+        }
     }
 
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
