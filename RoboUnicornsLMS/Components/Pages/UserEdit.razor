@@ -44,6 +44,13 @@
     </div>
 </EditForm>
 
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert @StatusMessageClass">
+        @StatusMessage
+    </div>
+}
+
 @code {
     [Parameter]
     public int UserId { get; set; }
@@ -51,6 +58,8 @@
     public User FormModel { get; set; } = new User();
 
     public List<Course> Courses { get; set; } = new();
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -73,11 +82,14 @@
         var response = await HttpClient.PutAsJsonAsync($"/api/users/{UserId}", postBody);
         if (response.IsSuccessStatusCode)
         {
-            // Success action
+            StatusMessage = "User successfully updated! Please refresh to see the changes.";
+            StatusMessageClass = "alert-success";
+           
         }
         else
         {
-            // Error action
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
         }
     }
 }

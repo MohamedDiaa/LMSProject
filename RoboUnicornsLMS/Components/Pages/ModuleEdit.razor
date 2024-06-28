@@ -3,7 +3,9 @@
 @inject HttpClient HttpClient
 @rendermode InteractiveServer
 
-<h3>Edit Module</h3>
+<div class="col text-center">
+    <h2>Edit module</h2>
+</div>
 
 <EditForm Model="@FormModel" FormName="EditModuleForm" 
     OnValidSubmit="HandleValidSubmit"
@@ -42,6 +44,13 @@
     </div>
 </EditForm>
 
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert @StatusMessageClass">
+        @StatusMessage
+    </div>
+}
+
 @code {
 
     [Parameter]
@@ -49,6 +58,9 @@
 
     [SupplyParameterFromForm]
     public ModuleDTO FormModel { get; set; } = new ModuleDTO();
+
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     public List<Course> Courses { get; set; } = [];
 
@@ -70,7 +82,18 @@
             CourseId = FormModel.CourseID
         };
 
-        await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
+        var response = await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
+        if (response.IsSuccessStatusCode)
+        {
+            StatusMessage = "Module successfully created! Please refresh to see the changes.";
+            StatusMessageClass = "alert-success";
+            
+        }
+        else
+        {
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
+        }
     }
 
     // Todo: Add handling for invalid submit and display validation errors on form

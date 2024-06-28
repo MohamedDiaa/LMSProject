@@ -131,6 +131,13 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </EditForm>
+
+    @if (!string.IsNullOrEmpty(StatusMessage))
+    {
+        <div class="alert @StatusMessageClass">
+            @StatusMessage
+        </div>
+    }
     }
 
 
@@ -159,6 +166,8 @@
     [Parameter]
     public int courseId { get; set; }
     private int moduleId { get; set; }
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     public string courseTitle = "Loading...";
 
@@ -257,13 +266,17 @@
         };
 
         var response = await HttpClient.PutAsJsonAsync($"/api/Courses/{courseId}", postBody);
-
+        
         if (response.IsSuccessStatusCode)
         {
-            //todo: update course info and send success message. 
-        } else
+            StatusMessage = "Course successfully updated! Please refresh to see changes";
+            StatusMessageClass = "alert-success";
+            
+        }
+        else
         {
-            Console.WriteLine($"Error updating course: {response.ReasonPhrase}");
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
         }
     }
 

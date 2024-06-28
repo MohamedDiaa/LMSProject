@@ -13,7 +13,9 @@ function myFunction() {
 
 </script>
 
-<h3>Create User</h3>
+<div class="col text-center">
+    <h2>Add user</h2>
+</div>
 <form>
     <label for="fname">First name:</label>
         <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
@@ -43,7 +45,16 @@ function myFunction() {
 
 <input type="submit" value="Submit" onclick=@CreateUser>
 
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert @StatusMessageClass">
+        @StatusMessage
+    </div>
+}
+
 @code {
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     List<Course> courses = new();
     String Fname;
@@ -72,7 +83,20 @@ function myFunction() {
                 CourseID = SelectedCourseId
             };
 
-        await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        
+
+        var response = await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        if (response.IsSuccessStatusCode)
+        {
+            StatusMessage = "Course successfully created!";
+            StatusMessageClass = "alert-success";
+            user = new User(); // Reset form
+        }
+        else
+        {
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
+        }
     }
 
 }
