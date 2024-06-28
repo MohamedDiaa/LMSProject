@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LMS.api.Controllers
 {
+#if false
     [ApiController]
     [Route("api/[controller]")]
     public class ActivityController : GenericController<Activity>
@@ -57,6 +58,7 @@ namespace LMS.api.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
+#endif 
     public class GenericController<TEntity> : ControllerBase where TEntity : class, IEntity
     {
         private readonly IGenericApiService<TEntity> _service;
