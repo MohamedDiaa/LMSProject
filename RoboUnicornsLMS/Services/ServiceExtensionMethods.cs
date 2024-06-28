@@ -1,48 +1,83 @@
-﻿using LMS.api.Model;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using RoboUnicornsLMS.Services;
+namespace RoboUnicornsLMS.Services;
 
-namespace RoboUnicornsLMS.Services
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    public static IServiceCollection AddRequestService<TService, TImplementation>(this IServiceCollection services)
+        where TService : class
+        where TImplementation : class, TService
     {
-        public static IServiceCollection AddGenericServices(this IServiceCollection services, IConfiguration configuration)
+        services.AddScoped<TService, TImplementation>();
+        services.AddHttpClient<TService, TImplementation>(client =>
         {
-            var apiSettings = new ApiSettings();
-            configuration.GetSection("ApiSettings").Bind(apiSettings);
+            client.BaseAddress = new Uri("https://localhost:7183");
+        });
 
-            services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
+        return services;
+    }
 
-            services.AddHttpContextAccessor();
-            services.AddTransient<AuthenticatedHttpClientHandler>();
-            services.AddTransient<LoggingHandler>();
+    public static IServiceCollection AddGenericServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        var apiSettings = new ApiSettings();
+        configuration.GetSection("ApiSettings").Bind(apiSettings);
 
-            foreach (var mapping in apiSettings.Mappings)
+        services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
+
+        services.AddHttpContextAccessor();
+        services.AddTransient<AuthenticatedHttpClientHandler>();
+        services.AddTransient<LoggingHandler>();
+
+        foreach (var mapping in apiSettings.Mappings)
+        {
+            var entityType = Type.GetType(mapping.Key.Name);
+            if (entityType == null)
             {
-                var entityType = mapping.Key;
-                var entityName = mapping.Value;
-                var serviceType = typeof(IGenericService<>).MakeGenericType(entityType);
-                var implementationType = typeof(GenericService<>).MakeGenericType(entityType);
-
-                var httpClientName = $"{entityType.Name}Client".ToLower();
-
-                services.AddHttpClient(httpClientName, client =>
-                {
-                    client.BaseAddress = new Uri($"{apiSettings.Host.ToLower()}/{apiSettings.EndPoint.ToLower()}/{entityName.ToLower()}");
-                })
-                .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
-                .AddHttpMessageHandler<LoggingHandler>();
-
-                services.AddTransient(serviceType, serviceProvider =>
-                {
-                    var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-                    var httpClient = httpClientFactory.CreateClient(httpClientName);
-                    return Activator.CreateInstance(implementationType, httpClient);
-                });
+                throw new InvalidOperationException($"Type '{mapping.Key}' not found.");
             }
 
-            return services;
+            var entityName = mapping.Value;
+            //var serviceType = typeof(IGenericRequestService<>).MakeGenericType(entityType);
+            //var implementationType = typeof(GenericRequestService<>).MakeGenericType(entityType);
+
+            var httpClientName = $"{entityType.Name}Client";
+
+            services.AddHttpClient(httpClientName, client =>
+            {
+                client.BaseAddress = new Uri($"{apiSettings.Host}/{apiSettings.EndPoint}/{entityName}");
+            })
+            .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+            .AddHttpMessageHandler<LoggingHandler>();
+
+            //services.AddTransient(serviceType, serviceProvider =>
+            //{
+            //    var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+            //    var httpClient = httpClientFactory.CreateClient(httpClientName);
+            //    return Activator.CreateInstance(implementationType, httpClient);
+            //});
         }
+
+        return services;
+    }
+}
+public static class ServiceCollectionExtensions2
+{
+    public static IServiceCollection AddGenericServices2(this IServiceCollection services, IConfiguration configuration)
+    {
+        var apiSettings = configuration.GetSection("ApiSettings").Get<ApiSettings>();
+
+        foreach (var mapping in apiSettings.Mappings)
+        {
+            var serviceType = typeof(IGenericRequestService<,>).MakeGenericType(mapping.Key);
+            var implementationType = typeof(GenericRequestService<,>).MakeGenericType(mapping.Key);
+            services.AddScoped(serviceType, provider =>
+            {
+                var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = new Uri(apiSettings.Host);
+                return Activator.CreateInstance(implementationType, new object[] { httpClient, mapping.Value });
+            });
+        }
+
+        return services;
     }
 }
