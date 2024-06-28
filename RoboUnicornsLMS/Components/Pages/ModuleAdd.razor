@@ -2,7 +2,9 @@
 @using LMS.api.Model
 @inject HttpClient HttpClient
 
-<h3>Add New Module</h3>
+<div class="col text-center">
+    <h2>Add module</h2>
+</div>
 
 <form method="post" data-enhance @onsubmit="OnSubmit" @formname="add-module-form">
     <AntiforgeryToken />
@@ -32,12 +34,22 @@
     </div>
 </form>
 
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert @StatusMessageClass">
+        @StatusMessage
+    </div>
+}
+
 @code {
     [Parameter]
     public int CourseId { get; set; }
 
     [SupplyParameterFromForm]
     private ModuleDTO FormModel { get; set; }
+
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     protected override void OnInitialized()
     {
@@ -55,6 +67,19 @@
             CourseId = CourseId
         };
 
-        await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+      
+
+        var response = await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        if (response.IsSuccessStatusCode)
+        {
+            StatusMessage = "Module successfully created!";
+            StatusMessageClass = "alert-success";
+            FormModel = new ModuleDTO(); // Reset form
+        }
+        else
+        {
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
+        }
     }
 }
