@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using RoboUnicornsLMS.Components;
+using RoboUnicornsLMS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7183") });
+//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7183") });
+builder.Services.AddGenericServices(builder.Configuration);
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 var app = builder.Build();
 
