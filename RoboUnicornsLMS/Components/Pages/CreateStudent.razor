@@ -2,48 +2,40 @@
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
 
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-
-</script>
-
-<div class="col text-center">
-    <h2>Add user</h2>
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-md-6">
+            <form @onsubmit="CreateUser" class="form-floating mb-3">
+                <h3>Create User</h3>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="fname" name="fname" @bind-value="Fname" placeholder="First name">
+                    <label for="fname" class="text-primary">First name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lname" name="lname" @bind-value="Lname" placeholder="Last name">
+                    <label for="lname" class="text-primary">Last name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" @bind-value="Email" placeholder="name@example.com">
+                    <label for="email" class="text-primary">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="course" @bind="SelectedCourseId" aria-label="Floating label select example">
+                        <option value="0" selected>Select a course</option>
+                        @foreach (var course in courses)
+                        {
+                            <option value="@course.Id">@course.Title</option>
+                        }
+                    </select>
+                    <label for="course" class="text-primary">Course</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<form>
-    <label for="fname">First name:</label>
-        <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname" @bind-value="Lname"><br><br>
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" @bind-value="Email"><br><br>
-
-       
-</form>
-<form class="form-floating">
-    <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
-    <label for="floatingInputValue">Input with value</label>
-</form>
-<div class="form-floating">
-    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-    <label for="floatingTextarea">Comments</label>
-</div>
-
-<select @bind = "@SelectedCourseId">
-    @foreach(var course in courses){
-        <option value="@course.Id">@course.Title </option>
-   
-    }
-    
-</select>
-
-<input type="submit" value="Submit" onclick=@CreateUser>
 
 @if (!string.IsNullOrEmpty(StatusMessage))
 {
@@ -56,47 +48,43 @@ function myFunction() {
     private string StatusMessage { get; set; }
     private string StatusMessageClass { get; set; }
 
-    List<Course> courses = new();
-    String Fname;
-    String Lname;
-    String Email;
-    int SelectedCourseId;
+    private List<Course> courses = new();
+    private string Fname;
+    private string Lname;
+    private string Email;
+    private int SelectedCourseId;
 
     protected override async Task OnInitializedAsync()
     {
-        // await HttpClient.GetAsync("/api/courses");
-
         courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
-
-
     }
 
-    public async Task CreateUser()
+    private async Task CreateUser()
     {
         var user = new User
-            {
+        {
+            FirstName = Fname,
+            LastName = Lname,
+            Email = Email,
+            Password = "123",
+            CourseID = SelectedCourseId
+        };
 
-                FirstName = Fname,
-                LastName = Lname,
-                Email = Email,
-                Password = "123",
-                CourseID = SelectedCourseId
-            };
-
-        
-
-        var response = await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        var response = await HttpClient.PostAsJsonAsync("/api/Users", user);
         if (response.IsSuccessStatusCode)
         {
-            StatusMessage = "Course successfully created!";
+            StatusMessage = "User successfully created!";
             StatusMessageClass = "alert-success";
-            user = new User(); // Reset form
+            // Reset form
+            Fname = string.Empty;
+            Lname = string.Empty;
+            Email = string.Empty;
+            SelectedCourseId = 0;
         }
         else
         {
-            StatusMessage = "Error creating course. Please try again.";
+            StatusMessage = "Error creating user. Please try again.";
             StatusMessageClass = "alert-danger";
         }
     }
-
 }
