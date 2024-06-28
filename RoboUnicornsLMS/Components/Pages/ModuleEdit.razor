@@ -1,10 +1,14 @@
 ﻿@page "/moduleedit/{ModuleId:int}"
 @using LMS.api.Model
+@using System.Net
 @inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
 <h3>Edit Module</h3>
 
+@if (!IsSaved)
+{
 <EditForm Model="@FormModel" FormName="EditModuleForm" 
     OnValidSubmit="HandleValidSubmit"
     method="post">
@@ -41,6 +45,12 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </EditForm>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    <button type="button" class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</button>
+}
 
 @code {
 
@@ -51,6 +61,11 @@
     public ModuleDTO FormModel { get; set; } = new ModuleDTO();
 
     public List<Course> Courses { get; set; } = [];
+
+    protected bool IsSaved { get; set; }
+
+    public string Message { get; set; }
+    public string StatusClass { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,8 +85,25 @@
             CourseId = FormModel.CourseID
         };
 
-        await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
+        var response = await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
+        // var response = new HttpResponseMessage() { StatusCode = HttpStatusCode.BadRequest };
+        if (response.IsSuccessStatusCode)
+        {
+            Message = "Module successfully edited!";
+            StatusClass = "alert-success";
+        }
+        else
+        {
+            Message = "Oops! Something went wrong. Please try again.";
+            StatusClass = "alert-danger";
+        }
+        IsSaved = true;
     }
 
     // Todo: Add handling for invalid submit and display validation errors on form
+
+    public void NavigateToOverview()
+    {
+        NavigationManager.NavigateTo($"ListModules/{FormModel.CourseID}");
+    }
 }

@@ -1,9 +1,13 @@
 ﻿@page "/course/{CourseId:int}/moduleadd"
 @using LMS.api.Model
+@using System.Net
 @inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 <h3>Add New Module</h3>
 
+@if (!Saved) {
 <form method="post" data-enhance @onsubmit="OnSubmit" @formname="add-module-form">
     <AntiforgeryToken />
 
@@ -31,6 +35,12 @@
         <button type="submit" class="btn btn-primary">Add Module</button>
     </div>
 </form>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    <button type="button" class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</button>
+}
 
 @code {
     [Parameter]
@@ -38,6 +48,11 @@
 
     [SupplyParameterFromForm]
     private ModuleDTO FormModel { get; set; }
+
+    protected bool Saved { get; set; }
+
+    public string Message { get; set; }
+    public string StatusClass { get; set; }
 
     protected override void OnInitialized()
     {
@@ -56,10 +71,22 @@
         };
 
         var response = await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        // var response = new HttpResponseMessage() { StatusCode = HttpStatusCode.BadRequest };
         if (response.IsSuccessStatusCode)
         {
-            // toastService.ShowSuccess(response);
-            // NavigationManager.
+            Message = "Module successfully added!";
+            StatusClass = "alert-success";
         }
+        else
+        {
+            Message = "Oops! Something went wrong. Please try again.";
+            StatusClass = "alert-danger";
+        }
+        Saved = true;
+    }
+
+    public void NavigateToOverview()
+    {
+        NavigationManager.NavigateTo($"/ListModules/{CourseId}");
     }
 }
