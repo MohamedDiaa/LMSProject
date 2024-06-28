@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
 using LMS.api.Data;
 
@@ -13,13 +9,13 @@ public class LMSContext : DbContext
     {
     }
 
-    public DbSet<Activity> Activitys { get; set; }
-    public DbSet<Course> Courses { get; set; } = default!;
-    public DbSet<Module> Modules { get; set; } = default!;
-    public DbSet<Role> Roles { get; set; } = default!;
-    public DbSet<Student> Students { get; set; } = default!;
-    public DbSet<Teacher> Teachers { get; set; } = default!;
-    public DbSet<User> Users { get; set; } = default!;
+    public DbSet<Activity> Activity => Set<Activity>();
+    public DbSet<Course> Course => Set<Course>();
+    public DbSet<Module> Module => Set<Module>();
+    public DbSet<Role> Role => Set<Role>();
+    public DbSet<Student> Student => Set<Student>();
+    public DbSet<Teacher> Teacher => Set<Teacher>();
+    public DbSet<User> User => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,5 +27,4 @@ public class LMSContext : DbContext
             .WithMany(m => m.Activities)
             .HasForeignKey(a => a.ModuleID);
     }
-
 }
