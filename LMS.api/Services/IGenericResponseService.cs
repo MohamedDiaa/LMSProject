@@ -2,7 +2,6 @@
 
 namespace LMS.api.Services
 {
-    public interface IUserResponseService : IGenericResponseService<ApplicationUser, string> { }
     public interface IGenericResponseService<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
         where TKey : notnull

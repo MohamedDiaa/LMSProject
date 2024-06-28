@@ -1,69 +1,63 @@
 ﻿using LMS.api.Model;
-using LMS.api.Services;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace LMS.api.Controllers
 {
-#if false
+    using LMS.api.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     [ApiController]
     [Route("api/[controller]")]
-    public class ActivityController : GenericController<Activity>
+    public class ActivityController : GenericController<Activity, int>
     {
-        public ActivityController(IGenericApiService<Activity> service) : base(service) { }
+        public ActivityController(IGenericResponseService<Activity, int> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class CourseController : GenericController<Course>
+    public class CourseController : GenericController<Course, int>
     {
-        public CourseController(IGenericApiService<Course> service) : base(service) { }
+        public CourseController(IGenericResponseService<Course, int> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class ModuleController : GenericController<Module>
+    public class ModuleController : GenericController<Module, int>
     {
-        public ModuleController(IGenericApiService<Module> service) : base(service) { }
+        public ModuleController(IGenericResponseService<Module, int> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class RoleController : GenericController<Role>
+    public class RoleController : GenericController<Role, string>
     {
-        public RoleController(IGenericApiService<Role> service) : base(service) { }
+        public RoleController(IGenericResponseService<Role, string> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController : GenericController<Student>
+    public class StudentController : GenericController<Student, string>
     {
-        public StudentController(IGenericApiService<Student> service) : base(service) { }
+        public StudentController(IGenericResponseService<Student, string> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class TeacherController : GenericController<Teacher>
+    public class TeacherController : GenericController<Teacher, string>
     {
-        public TeacherController(IGenericApiService<Teacher> service) : base(service) { }
+        public TeacherController(IGenericResponseService<Teacher, string> service) : base(service) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : GenericController<User>
+    public class GenericController<TEntity, TKey> : ControllerBase, IGenericController<TEntity, TKey>
+        where TEntity : class, IEntity<TKey>
+        where TKey : notnull
     {
-        public UserController(IGenericApiService<User> service) : base(service) { }
-    }
+        private readonly IGenericResponseService<TEntity, TKey> _service;
 
-    [ApiController]
-    [Route("api/[controller]")]
-#endif 
-    public class GenericController<TEntity> : ControllerBase where TEntity : class, IEntity
-    {
-        private readonly IGenericApiService<TEntity> _service;
-
-        public GenericController(IGenericApiService<TEntity> service)
+        public GenericController(IGenericResponseService<TEntity, TKey> service)
         {
             _service = service;
         }
@@ -76,7 +70,7 @@ namespace LMS.api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TEntity>> Get(int id)
+        public async Task<ActionResult<TEntity>> Get(TKey id)
         {
             var entity = await _service.GetByIdAsync(id);
             if (entity == null)
@@ -94,9 +88,9 @@ namespace LMS.api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, TEntity entity)
+        public async Task<IActionResult> Update(TKey id, TEntity entity)
         {
-            if (id != entity.Id)
+            if (id.Equals(entity.Id))
             {
                 return BadRequest();
             }
@@ -106,7 +100,7 @@ namespace LMS.api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(TKey id)
         {
             var entity = await _service.GetByIdAsync(id);
             if (entity == null)
