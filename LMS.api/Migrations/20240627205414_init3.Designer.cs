@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS.api.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    partial class LMSContextModelSnapshot : ModelSnapshot
+    [Migration("20240627205414_init3")]
+    partial class init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime>("Ends")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -45,7 +48,7 @@ namespace LMS.api.Migrations
                     b.Property<int>("ModuleID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Start")
+                    b.Property<DateTime>("Starts")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -74,7 +77,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime>("Ends")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -87,7 +90,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Start")
+                    b.Property<DateTime>("Starts")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -117,13 +120,13 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime>("Ends")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Start")
+                    b.Property<DateTime>("Starts")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
