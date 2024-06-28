@@ -101,13 +101,46 @@ namespace LMS.api.Controllers
 
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /* [HttpPost]
+         public async Task<ActionResult<CourseDTO>> PostCourse(CourseDTO course)
+         {
+             _context.Course.Add(course);
+             await _context.SaveChangesAsync();
+
+             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+         }
+        */
+
+        //New POST method because module and student was required in the above. 
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<CourseDTO>> PostCourse(CourseDTO courseDto)
         {
+
+            
+            var course = new Course
+            {
+                Title = courseDto.Title,
+                Description = courseDto.Description,
+                MaxCapcity = courseDto.MaxCapcity,
+                Start = courseDto.Start,
+                End = courseDto.End,
+         
+            };
+
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            // Map back to CourseDTO if needed
+            var createdCourseDto = new CourseDTO
+            {
+                Title = course.Title,
+                Description = course.Description,
+                MaxCapcity = course.MaxCapcity,
+                Start = course.Start,
+                End = course.End
+            };
+
+            return CreatedAtAction("GetCourse", new { id = course.Id }, createdCourseDto);
         }
 
         // DELETE: api/Courses/5

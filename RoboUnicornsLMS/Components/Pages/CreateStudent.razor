@@ -1,4 +1,4 @@
-﻿@page "/CreateStudent"
+﻿@page "/CreateUser"
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
 
@@ -13,16 +13,27 @@ function myFunction() {
 
 </script>
 
-<h3>Create Student</h3>
+<div class="col text-center">
+    <h2>Add user</h2>
+</div>
 <form>
     <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
+        <input type="text" id="fname" name="fname" @bind-value="Fname"><br><br>
     <label for="lname">Last name:</label>
     <input type="text" id="lname" name="lname" @bind-value="Lname"><br><br>
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" @bind-value="Email"><br><br>
+
        
 </form>
+<form class="form-floating">
+    <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
+    <label for="floatingInputValue">Input with value</label>
+</form>
+<div class="form-floating">
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+    <label for="floatingTextarea">Comments</label>
+</div>
 
 <select @bind = "@SelectedCourseId">
     @foreach(var course in courses){
@@ -34,7 +45,16 @@ function myFunction() {
 
 <input type="submit" value="Submit" onclick=@CreateUser>
 
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert @StatusMessageClass">
+        @StatusMessage
+    </div>
+}
+
 @code {
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     List<Course> courses = new();
     String Fname;
@@ -63,7 +83,20 @@ function myFunction() {
                 CourseID = SelectedCourseId
             };
 
-        await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        
+
+        var response = await HttpClient.PostAsJsonAsync<User>("/api/Users", user);
+        if (response.IsSuccessStatusCode)
+        {
+            StatusMessage = "Course successfully created!";
+            StatusMessageClass = "alert-success";
+            user = new User(); // Reset form
+        }
+        else
+        {
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
+        }
     }
 
 }

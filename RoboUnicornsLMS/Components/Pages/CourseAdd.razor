@@ -1,16 +1,15 @@
-﻿@page "/course/{CourseId:int}/moduleadd"
-@using LMS.api.Model
+﻿@page "/CourseAdd"
+@rendermode InteractiveServer
 @inject HttpClient HttpClient
 
 <div class="col text-center">
-    <h2>Add module</h2>
+    <h2>Add course</h2>
 </div>
-
 <form method="post" data-enhance @onsubmit="OnSubmit" @formname="add-module-form">
     <AntiforgeryToken />
 
-    <div class="mb-3">
-        <label class="form-label">Title</label>
+    <div class="form-floating mb-3">
+        <label for="floatingInput">Title</label>
         <InputText class="form-control" @bind-Value="@FormModel.Title" placeholder="Enter title" />
     </div>
 
@@ -28,9 +27,13 @@
         <label class="form-label">End date</label>
         <InputDate class="form-control" @bind-Value="@FormModel.End" placeholder="Enter end date"></InputDate>
     </div>
+    <div class="mb-3">
+        <label class="form-label">Max participants</label>
+        <InputNumber class="form-control" @bind-Value="@FormModel.MaxCapcity" placeholder="Enter max participants"></InputNumber>
+    </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Add Module</button>
+        <button type="submit" class="btn btn-primary">Add Course</button>
     </div>
 </form>
 
@@ -42,18 +45,13 @@
 }
 
 @code {
-    [Parameter]
-    public int CourseId { get; set; }
-
-    [SupplyParameterFromForm]
-    private ModuleDTO FormModel { get; set; }
-
     private string StatusMessage { get; set; }
     private string StatusMessageClass { get; set; }
+    private Course FormModel { get; set; }
 
     protected override void OnInitialized()
     {
-        FormModel ??= new ModuleDTO();
+        FormModel ??= new Course();
     }
 
     private async Task OnSubmit()
@@ -64,17 +62,15 @@
             Description = FormModel.Description,
             Start = FormModel.Start,
             End = FormModel.End,
-            CourseId = CourseId
+            MaxCapcity = FormModel.MaxCapcity,
         };
 
-      
-
-        var response = await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        var response = await HttpClient.PostAsJsonAsync("/api/courses", postBody);
         if (response.IsSuccessStatusCode)
         {
-            StatusMessage = "Module successfully created!";
+            StatusMessage = "Course successfully created!";
             StatusMessageClass = "alert-success";
-            FormModel = new ModuleDTO(); // Reset form
+            FormModel = new Course(); // Reset form
         }
         else
         {

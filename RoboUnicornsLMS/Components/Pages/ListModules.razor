@@ -51,15 +51,15 @@
     {
         <tr>
             <td>
-                <p>@x.Title</p>
+                        <p style="min-width:250px">@x.Title</p>
             </td>
             <td>
                 <p>@x.Description</p>
             </td>
-            <td>
+                    <td style="width:100px">
                 <p>@x.Start.ToShortDateString()</p>
             </td>
-            <td>
+                    <td style="width:100px">
                 <p>@x.End.ToShortDateString()</p>
             </td>
             <td>
@@ -82,9 +82,7 @@
     <tr>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">Registered</th>
-         
+        <th scope="col">Role</th>         
     </tr>
     </thead>
     <tbody>
@@ -92,9 +90,9 @@
   @foreach (var user in participants)
                 {
                     <tr>
-                      <td><p>@user.FirstName</p></td>
+                    <td><p>@user.FirstName @user.LastName</p></td>
                         <td><p>@user.Email</p></td>
-                       
+                        <td><p>Undefined</p></td>
                     </tr>
                 }
     
@@ -133,6 +131,13 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </EditForm>
+
+    @if (!string.IsNullOrEmpty(StatusMessage))
+    {
+        <div class="alert @StatusMessageClass">
+            @StatusMessage
+        </div>
+    }
     }
 
 
@@ -157,9 +162,12 @@
 @code {
 
     [Parameter]
+    public int userId { get; set; }
+    [Parameter]
     public int courseId { get; set; }
-
     private int moduleId { get; set; }
+    private string StatusMessage { get; set; }
+    private string StatusMessageClass { get; set; }
 
     public string courseTitle = "Loading...";
 
@@ -178,6 +186,7 @@
 
     protected override async Task OnInitializedAsync()
     {  
+      
         await LoadParticipantsDataAsync();
         await LoadModulesDataAsync();
         await LoadCourseDataAsync();
@@ -199,11 +208,16 @@
 
 
 
+  
     private async Task LoadParticipantsDataAsync()
     {
         try
         {
-            participants = await HttpClient.GetFromJsonAsync<List<User>>($"/api/Courses/User/{courseId}") ?? new List<User>();
+            var allUsers = await HttpClient.GetFromJsonAsync<List<User>>("/api/users");
+            if (allUsers != null)
+            {
+                participants = allUsers.Where(u => u.CourseID == courseId).ToList();
+            }
         }
         catch (Exception ex)
         {
@@ -252,13 +266,17 @@
         };
 
         var response = await HttpClient.PutAsJsonAsync($"/api/Courses/{courseId}", postBody);
-
+        
         if (response.IsSuccessStatusCode)
         {
-            //todo: update course info and send success message. 
-        } else
+            StatusMessage = "Course successfully updated! Please refresh to see changes";
+            StatusMessageClass = "alert-success";
+            
+        }
+        else
         {
-            Console.WriteLine($"Error updating course: {response.ReasonPhrase}");
+            StatusMessage = "Error creating course. Please try again.";
+            StatusMessageClass = "alert-danger";
         }
     }
 
