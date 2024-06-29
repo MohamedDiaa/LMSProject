@@ -73,13 +73,13 @@ function myFunction() {
 
     public async Task CreateUser()
     {
-        var user = new User
+        var user = new ApplicationUser
             {
 
                 FirstName = Fname,
                 LastName = Lname,
                 Email = Email,
-                Password = "123",
+                PasswordHash = "123",
                 CourseID = SelectedCourseId
             };
 
@@ -90,7 +90,7 @@ function myFunction() {
         {
             StatusMessage = "Course successfully created!";
             StatusMessageClass = "alert-success";
-            user = new User(); // Reset form
+            user = new ApplicationUser(); // Reset form
         }
         else
         {

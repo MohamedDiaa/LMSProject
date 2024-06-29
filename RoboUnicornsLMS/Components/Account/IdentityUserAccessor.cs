@@ -3,16 +3,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace RoboUnicornsLMS.Components.Account
 {
-    public sealed class IdentityUserAccessor
+    public sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IdentityRedirectManager redirectManager;
+        private readonly UserManager<ApplicationUser> userManager = userManager;
+        private readonly IdentityRedirectManager redirectManager = redirectManager;
 
-        public IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
-        {
-            this.userManager = userManager;
-            this.redirectManager = redirectManager;
-        }
         public async Task<ApplicationUser> GetRequiredUserAsync(HttpContext context)
         {
             var user = await userManager.GetUserAsync(context.User);

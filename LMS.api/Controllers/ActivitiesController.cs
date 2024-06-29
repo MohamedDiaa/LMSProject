@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
+using LMS.api.Data;
 
 namespace LMS.api.Controllers
 {
@@ -13,9 +14,9 @@ namespace LMS.api.Controllers
     [ApiController]
     public class ActivitiesController : ControllerBase
     {
-        private readonly LMSContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ActivitiesController(LMSContext context)
+        public ActivitiesController(ApplicationDbContext context)
         {
             _context = context;
         }

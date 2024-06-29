@@ -1,11 +1,12 @@
-﻿@page "/studentorteacher"
+﻿@page "/admin"
 @rendermode InteractiveServer
-@attribute [Authorize(Policy = ApplicationPolicy.RequireStudentOrTeacherRole)]
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAdminRole)]
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Authorization
 @using LMS.api.Model
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Identity
 
 <PageTitle>Admin</PageTitle>

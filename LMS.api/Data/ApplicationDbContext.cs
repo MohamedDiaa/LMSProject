@@ -10,7 +10,6 @@ namespace LMS.api.Data
         public DbSet<Course> Course => Set<Course>();
         public DbSet<Document> Document => Set<Document>();
         public DbSet<Module> Module => Set<Module>();
-        public DbSet<Role> Role => Set<Role>();
         public DbSet<Student> Student => Set<Student>();
         public DbSet<Teacher> Teacher => Set<Teacher>();
 

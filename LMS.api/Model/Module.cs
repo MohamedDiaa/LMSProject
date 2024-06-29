@@ -9,8 +9,8 @@ namespace LMS.api.Model
         public int Id { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime LastModified { get; set; } = DateTime.UtcNow;
-        public DateTime Starts { get; set; } = DateTime.Today;
-        public DateTime Ends { get; set; } = DateTime.Today.AddMonths(1);
+        public DateTime Start { get; set; } = DateTime.Today;
+        public DateTime End { get; set; } = DateTime.Today.AddMonths(1);
         public string Title { get; set; }
         public string Description { get; set; }
 

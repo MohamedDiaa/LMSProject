@@ -1,4 +1,5 @@
 using LMS.api.Configurations;
+using LMS.api.Data;
 using LMS.api.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,8 +11,9 @@ namespace LMS.api
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<LMSContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("LMSContext") ?? throw new InvalidOperationException("Connection string 'LMSContext' not found.")));
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
+                    ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
             // Add services to the container.
 
@@ -30,7 +32,6 @@ namespace LMS.api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            await app.SeedDataAsync();
 
             app.UseHttpsRedirection();
 

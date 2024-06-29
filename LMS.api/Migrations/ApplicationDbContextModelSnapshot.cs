@@ -37,7 +37,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -46,7 +46,7 @@ namespace LMS.api.Migrations
                     b.Property<int>("ModuleID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -72,11 +72,6 @@ namespace LMS.api.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -93,10 +88,6 @@ namespace LMS.api.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationRole");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("LMS.api.Model.ApplicationUser", b =>
@@ -208,7 +199,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
@@ -221,7 +212,7 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -267,13 +258,13 @@ namespace LMS.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Ends")
+                    b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Starts")
+                    b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -391,13 +382,6 @@ namespace LMS.api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("LMS.api.Model.Role", b =>
-                {
-                    b.HasBaseType("LMS.api.Model.ApplicationRole");
-
-                    b.HasDiscriminator().HasValue("Role");
                 });
 
             modelBuilder.Entity("LMS.api.Model.Student", b =>

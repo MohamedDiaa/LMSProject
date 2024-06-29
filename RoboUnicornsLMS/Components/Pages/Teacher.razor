@@ -1,14 +1,15 @@
-﻿@page "/admin"
+﻿@page "/teacher"
 @rendermode InteractiveServer
-@attribute [Authorize(Policy = ApplicationPolicy.RequireAdminRole)]
+@attribute [Authorize(Policy = ApplicationPolicy.RequireTeacherRole)]
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Authorization
 @using LMS.api.Model
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Identity
 
-<PageTitle>Admin</PageTitle>
+<PageTitle>Teacher</PageTitle>
 
 @code {
     private string userName = string.Empty;
@@ -38,8 +39,8 @@
     }
 }
 
-<h3>Admin Page</h3>
-<p>This page is accessible only to users in the Admin role.</p>
+<h3>Teacher Page</h3>
+<p>This page is accessible only to users in the Teacher role.</p>
 @if (userName != "")
 {
     if (userRoles.Any())

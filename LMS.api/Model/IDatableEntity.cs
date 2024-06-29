@@ -3,7 +3,7 @@
     public interface IDatableEntity : IEntity<int>
     {
         DateTime LastModified { get; set; }
-        DateTime Starts { get; set; }
-        DateTime Ends { get; set; }
+        DateTime Start { get; set; }
+        DateTime End { get; set; }
     }
 }

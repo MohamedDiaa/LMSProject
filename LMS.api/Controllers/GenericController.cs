@@ -30,13 +30,6 @@ namespace LMS.api.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class RoleController : GenericController<Role, string>
-    {
-        public RoleController(IGenericResponseService<Role, string> service) : base(service) { }
-    }
-
-    [ApiController]
-    [Route("api/[controller]")]
     public class StudentController : GenericController<Student, string>
     {
         public StudentController(IGenericResponseService<Student, string> service) : base(service) { }
