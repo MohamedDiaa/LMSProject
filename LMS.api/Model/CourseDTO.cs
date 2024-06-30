@@ -6,8 +6,8 @@
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int maxCapcity { get; set; } //I spelled it wrong intentionally based on the schema. /Martin 
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime Start { get; set; } = DateTime.Now;
+        public DateTime End { get; set; } = DateTime.Now;
 
     }
 }

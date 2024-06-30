@@ -34,9 +34,12 @@ namespace RoboUnicornsLMS.Services
     {
         Task<IEnumerable<TEntity>> GetAsync(CancellationToken cancellation = default);
         Task<TEntity?> GetAsync(TKey id, CancellationToken cancellation = default);
+        Task<TDto?> GetAsync<TDto>(TKey id, CancellationToken cancellation = default);
         Task<HttpResponseMessage> CreateAsync(TEntity entity, CancellationToken cancellation = default);
+        Task<HttpResponseMessage> CreateAsync<TDto>(TDto entity, CancellationToken cancellation = default);
         Task<HttpResponseMessage> UpdateAsync(TEntity entity, CancellationToken cancellation = default);
         Task<HttpResponseMessage> UpdateAsync(TKey id, TEntity entity, CancellationToken cancellation = default);
+        Task<HttpResponseMessage> UpdateAsync<TDto>(TKey id, TDto entity, CancellationToken cancellation = default);
         Task<bool> DeleteAsync(TKey id, CancellationToken cancellation = default);
     }
 }

@@ -1,6 +1,4 @@
-﻿using LMS.api.Configurations;
-using LMS.api.Model;
-using System.Net.Http.Json;
+﻿using LMS.api.Model;
 
 namespace RoboUnicornsLMS.Services
 {
@@ -54,6 +52,11 @@ namespace RoboUnicornsLMS.Services
             }
         }
 
+        public async Task<TDto?> GetAsync<TDto>(TKey id, CancellationToken cancellation = default)
+        {
+            return await _httpClient.GetFromJsonAsync<TDto>($"{_endpointPath}/{id}");
+        }
+
         public async Task<TEntity?> GetAsync(TKey id, CancellationToken cancellation = default)
         {
             try
@@ -79,6 +82,29 @@ namespace RoboUnicornsLMS.Services
             return default;
         }
 
+        public async Task<HttpResponseMessage> CreateAsync<TDto>(TDto dto, CancellationToken cancellation = default)
+        {
+            try
+            {
+                cancellation.ThrowIfCancellationRequested();
+                var response = await _httpClient.PostAsJsonAsync(_endpointPath, dto, cancellation);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new HttpRequestException($"An error occurred while attempting to create a new {typeof(TDto).Name}.", ex);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new TaskCanceledException($"The request to create a new {typeof(TDto).Name} was cancelled.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"An error occurred while attempting to create a new {typeof(TDto).Name}.", ex);
+            }
+        }
+
         public async Task<HttpResponseMessage> CreateAsync(TEntity entity, CancellationToken cancellation = default)
         {
             try
@@ -100,7 +126,6 @@ namespace RoboUnicornsLMS.Services
             {
                 throw new InvalidOperationException($"An error occurred while attempting to create a new {typeof(TEntity).Name}.", ex);
             }
-
         }
 
         public async Task<HttpResponseMessage> UpdateAsync(TEntity entity, CancellationToken cancellation = default)
@@ -114,6 +139,29 @@ namespace RoboUnicornsLMS.Services
             {
                 cancellation.ThrowIfCancellationRequested();
                 var response = await _httpClient.PutAsJsonAsync($"{_endpointPath}/{entity.Id}", entity, cancellation);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new HttpRequestException($"An error occurred while attempting to update the {typeof(TEntity).Name}.", ex);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new TaskCanceledException($"The request to update the {typeof(TEntity).Name} was cancelled.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"An error occurred while attempting to update the {typeof(TEntity).Name}.", ex);
+            }
+        }
+
+        public async Task<HttpResponseMessage> UpdateAsync<TDto>(TKey id, TDto entity, CancellationToken cancellation = default)
+        {
+            try
+            {
+                cancellation.ThrowIfCancellationRequested();
+                var response = await _httpClient.PutAsJsonAsync($"{_endpointPath}/{id}", entity, cancellation);
                 response.EnsureSuccessStatusCode();
                 return response;
             }
