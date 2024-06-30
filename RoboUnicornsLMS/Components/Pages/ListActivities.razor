@@ -1,5 +1,6 @@
 ﻿@page "/module/{ModuleId:int}/activities"
-@inject HttpClient HttpClient
+@using RoboUnicornsLMS.Services
+@inject IActivityRequestService ActivityRequestService
 @rendermode InteractiveServer
 
 <h3>ListActivities</h3>
@@ -42,13 +43,13 @@
     [Parameter]
     public int ModuleId { get; set; }
 
-    public List<Activity> Activities = new();
+    public IEnumerable<Activity> Activities = new List<Activity>();
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            Activities = await HttpClient.GetFromJsonAsync<List<Activity>>($"/api/Activities/module/{ModuleId}") ?? new List<Activity>();
+            Activities = await ActivityRequestService.GetActivitiesByModuleIdAsync(ModuleId);
         }
         catch (Exception ex)
         {
