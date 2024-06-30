@@ -1,6 +1,8 @@
 using LMS.api.Data;
+using LMS.api.Extensions;
 using LMS.api.Model;
 using LMS.api.Seed;
+using LMS.api.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -10,6 +12,7 @@ using RoboUnicornsLMS.Components.Account;
 using RoboUnicornsLMS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -48,10 +51,13 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options => option
 builder.Services.AddSingleton<IEmailSender, IdentityNoOpEmailSender>();
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
-builder.Services.AddRequestService<IActivityRequestService, ActivityRequestService>();
-builder.Services.AddRequestService<ICourseRequestService, CourseRequestService>();
-builder.Services.AddRequestService<IDocumentRequestService, DocumentRequestService>();
-builder.Services.AddRequestService<IModuleRequestService, ModuleRequestService>();
+builder.Services.AddRequestService<IActivityRequestService, ActivityRequestService>(configuration);
+builder.Services.AddRequestService<IApplicationUserRequestService, ApplicationUserRequestService>(configuration);
+builder.Services.AddRequestService<IActivityRequestService, ActivityRequestService>(configuration);
+builder.Services.AddRequestService<IApplicationUserRequestService, ApplicationUserRequestService>(configuration);
+builder.Services.AddRequestService<ICourseRequestService, CourseRequestService>(configuration);
+builder.Services.AddRequestService<IDocumentRequestService, DocumentRequestService>(configuration);
+builder.Services.AddRequestService<IModuleRequestService, ModuleRequestService>(configuration);
 
 var app = builder.Build();
 
