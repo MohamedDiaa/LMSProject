@@ -16,21 +16,28 @@ namespace LMS.api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public UsersController(UserManager<ApplicationUser> userManager)
+        public UsersController(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUser([FromQuery] bool includeRoles = true)
         {
-            var users = await Task.FromResult(_userManager.Users.ToList());
-            return Ok(users);
+            IQueryable<ApplicationUser> users = _userManager.Users;
+            if (includeRoles)
+            {
+                users = users.Include(u => u.Roles);
+            }
+            return Ok(await Task.FromResult(users));
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
@@ -51,7 +58,6 @@ namespace LMS.api.Controllers
             {
                 return BadRequest();
             }
-
 
             try
             {
@@ -97,6 +103,57 @@ namespace LMS.api.Controllers
 
             await _userManager.DeleteAsync(user);
 
+            return NoContent();
+        }
+
+        // Get roles of a user
+        [HttpGet("{userId}/roles")]
+        public async Task<ActionResult<IEnumerable<string>>> GetUserRoles(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(roles);
+        }
+
+        // Add a role to a user
+        [HttpPost("{id}/roles")]
+        public async Task<IActionResult> AddUserRole(string id, [FromBody] string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                return BadRequest("Role does not exist");
+            }
+            var result = await _userManager.AddToRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/roles")]
+        public async Task<IActionResult> RemoveUserRole(string id, [FromBody] string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
             return NoContent();
         }
 

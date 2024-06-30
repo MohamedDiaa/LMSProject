@@ -1,5 +1,4 @@
-﻿
-using Bogus;
+﻿using Bogus;
 using Bogus.DataSets;
 using LMS.api.Data;
 using LMS.api.Model;

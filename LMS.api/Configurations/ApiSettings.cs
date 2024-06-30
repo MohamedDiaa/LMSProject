@@ -1,4 +1,4 @@
-﻿namespace RoboUnicornsLMS.Services
+﻿namespace LMS.api.Configurations
 {
     public class ApiSettings
     {

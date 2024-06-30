@@ -10,6 +10,7 @@ namespace LMS.api.Model
             get => PasswordHash ?? string.Empty;
             set => PasswordHash = value ?? throw new ArgumentNullException(nameof(Password));
         }
-    }
 
+        public ICollection<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
+    }
 }
