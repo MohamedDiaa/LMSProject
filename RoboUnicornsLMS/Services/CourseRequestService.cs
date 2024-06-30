@@ -10,12 +10,12 @@ namespace RoboUnicornsLMS.Services
 
         public async Task<Course?> GetCourseForUserAsync(string userId, CancellationToken cancellation = default)
         {
-            return await _httpClient.GetFromJsonAsync<Course>($"{_endpointPath}/User/{userId}");
+            return await _httpClient.GetFromJsonAsync<Course>($"{_endpointPath}/{userId}");
         }
 
-        public Task<HttpResponseMessage> UpdateAsync(int id, CourseDTO entity, CancellationToken cancellation = default)
+        public Task<HttpResponseMessage> UpdateAsync(int courseId, CourseDTO entity, CancellationToken cancellation = default)
         {
-            return _httpClient.PutAsJsonAsync($"{_endpointPath}/{id}", entity);
+            return _httpClient.PutAsJsonAsync($"{_endpointPath}/{courseId}", entity);
         }
     }
 }
