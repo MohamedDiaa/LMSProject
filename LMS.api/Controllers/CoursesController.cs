@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using LMS.api.Data;
+using LMS.api.DTO;
+using LMS.api.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LMS.api.Model;
-using LMS.api.Extensions;
-using LMS.api.DTO;
-using System.Globalization;
-using LMS.api.Data;
-using Microsoft.AspNetCore.Identity;
 
 namespace LMS.api.Controllers
 {
