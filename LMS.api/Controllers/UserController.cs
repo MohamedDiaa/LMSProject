@@ -2,7 +2,6 @@
 using LMS.api.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace LMS.api.Controllers
 {
@@ -66,9 +65,13 @@ namespace LMS.api.Controllers
             {
                 return NotFound();
             }
+            user.Id = userDto.Id;
+            user.FirstName = userDto.FirstName;
+            user.LastName = userDto.LastName;
             user.Email = userDto.Email;
             user.UserName = userDto.UserName;
-            // Update other properties as needed
+            user.CourseID = userDto.CourseId;
+
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
