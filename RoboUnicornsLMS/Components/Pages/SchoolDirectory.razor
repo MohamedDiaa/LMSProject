@@ -1,6 +1,7 @@
 ﻿@page "/SchoolDirectory"
+@using RoboUnicornsLMS.Services
+@inject IApplicationUserRequestService ApplicationUserRequestService
 @rendermode InteractiveServer
-@inject HttpClient HttpClient
 
 <div class="container">
     <div class="row align-items-center mb-3">
@@ -61,7 +62,7 @@
 
 @code {
 
-    private List<User> users = new();
+    private IEnumerable<ApplicationUser> users = new List<ApplicationUser>();
     private ConfirmationDialog DeleteDialog;
     private string UserIdToDelete;
     private string UserNameToDelete;
@@ -69,7 +70,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        users = await HttpClient.GetFromJsonAsync<List<User>>("/api/users") ?? new();
+        users = await ApplicationUserRequestService.GetAsync();
     }
 
     private void OpenDeleteDialog(string userId, string firstName, string lastName)
@@ -85,14 +86,16 @@
         {
             try
             {
-                var response = await HttpClient.DeleteAsync($"/api/users/{UserIdToDelete}");
+                var response = await ApplicationUserRequestService.DeleteAsync(UserIdToDelete);
                 if (response.IsSuccessStatusCode)
                 {
                     // Remove the user from the list
                     var user = users.FirstOrDefault(u => u.Id == UserIdToDelete);
                     if (user != null)
                     {
-                        users.Remove(user);
+                        var temp = users.ToList();
+                        temp.Remove(user);
+                        users = temp;
                     }
                 }
                 else

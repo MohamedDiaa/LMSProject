@@ -299,7 +299,7 @@
         if (deleteConfirmed)
         {
             var response = await ModuleRequestService.DeleteAsync(moduleId);
-            if (response)
+            if (response.IsSuccessStatusCode)
             {
                 //Remove the deleted module from the list so it disappears from the UI
                 var temp = modules.ToList();

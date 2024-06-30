@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using LMS.api.Model;
+﻿using LMS.api.Model;
 
 namespace RoboUnicornsLMS.Services
 {

@@ -4,7 +4,7 @@ namespace RoboUnicornsLMS.Services
 {
     public interface IActivityRequestService : IGenericRequestService<Activity, int>
     {
-        Task<IEnumerable<Activity>> GetActivitiesByModuleIdAsync(int moduleId, CancellationToken cancellation = default);
+        public Task<IEnumerable<Activity>> GetActivitiesByModuleIdAsync(int moduleId, CancellationToken cancellation = default);
     }
     public interface IApplicationUserRequestService : IGenericRequestService<ApplicationUser, string>
     {
@@ -40,6 +40,6 @@ namespace RoboUnicornsLMS.Services
         Task<HttpResponseMessage> UpdateAsync(TEntity entity, CancellationToken cancellation = default);
         Task<HttpResponseMessage> UpdateAsync(TKey id, TEntity entity, CancellationToken cancellation = default);
         Task<HttpResponseMessage> UpdateAsync<TDto>(TKey id, TDto entity, CancellationToken cancellation = default);
-        Task<bool> DeleteAsync(TKey id, CancellationToken cancellation = default);
+        Task<HttpResponseMessage> DeleteAsync(TKey id, CancellationToken cancellation = default);
     }
 }

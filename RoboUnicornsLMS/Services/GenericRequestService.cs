@@ -179,13 +179,13 @@ namespace RoboUnicornsLMS.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(TKey id, CancellationToken cancellation = default)
+        public async Task<HttpResponseMessage> DeleteAsync(TKey id, CancellationToken cancellation = default)
         {
             try
             {
                 cancellation.ThrowIfCancellationRequested();
                 var response = await _httpClient.DeleteAsync($"{_endpointPath}/{id}", cancellation);
-                return response.IsSuccessStatusCode;
+                return response;
             }
             catch (HttpRequestException ex)
             {
