@@ -1,6 +1,5 @@
 ﻿@page "/ListModules/{courseId:int}"
 @rendermode InteractiveServer
-@inject HttpClient HttpClient
 @inject IApplicationUserRequestService ApplicationUserService
 @inject ICourseRequestService CourseRequestService
 @inject IModuleRequestService ModuleRequestService
@@ -190,12 +189,17 @@
 
     protected override async Task OnInitializedAsync()
     {  
-      
+
         await LoadParticipantsDataAsync();
         await LoadModulesDataAsync();
         await LoadCourseDataAsync();
-        FormModel = await HttpClient.GetFromJsonAsync<CourseDTO>($"/api/Courses/{courseId}");
+        FormModel = await CourseRequestService.GetAsync<CourseDTO>(courseId) ?? FormModel;
 
+        if (FormModel is null)
+        {
+            StatusMessage = "Error loading course. Please try again.";
+            StatusMessageClass = "alert-danger";
+        }
     }
 
     private async Task LoadModulesDataAsync()
@@ -270,7 +274,6 @@
         };
 
         var response = await CourseRequestService.UpdateAsync(courseId, postBody, default);
-        response = await HttpClient.PutAsJsonAsync($"/api/Courses/{courseId}", postBody);
         
         if (response.IsSuccessStatusCode)
         {
@@ -295,8 +298,8 @@
     {
         if (deleteConfirmed)
         {
-            var response = await HttpClient.DeleteAsync($"/api/Modules/{moduleId}");
-            if (response.IsSuccessStatusCode)
+            var response = await ModuleRequestService.DeleteAsync(moduleId);
+            if (response)
             {
                 //Remove the deleted module from the list so it disappears from the UI
                 var temp = modules.ToList();
