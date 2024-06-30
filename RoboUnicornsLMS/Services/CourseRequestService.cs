@@ -1,10 +1,4 @@
-﻿using LMS.api.DTO;
-using LMS.api.Model;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using LMS.api.Model;
 
 namespace RoboUnicornsLMS.Services
 {
@@ -17,6 +11,11 @@ namespace RoboUnicornsLMS.Services
         public async Task<Course?> GetCourseForUserAsync(string userId, CancellationToken cancellation = default)
         {
             return await _httpClient.GetFromJsonAsync<Course>($"{_endpointPath}/User/{userId}");
+        }
+
+        public Task<HttpResponseMessage> UpdateAsync(int id, CourseDTO entity, CancellationToken cancellation = default)
+        {
+            return _httpClient.PutAsJsonAsync($"{_endpointPath}/{id}", entity);
         }
     }
 }
