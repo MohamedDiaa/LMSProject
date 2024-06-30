@@ -1,6 +1,11 @@
 ﻿@page "/ListModules/{courseId:int}"
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
+@inject IApplicationUserRequestService ApplicationUserService
+@inject ICourseRequestService CourseRequestService
+@inject IModuleRequestService ModuleRequestService
+@using LMS.api.Model
+@using RoboUnicornsLMS.Services
 
 <PageTitle>Modules</PageTitle>
 
@@ -172,8 +177,8 @@
 
     private string currentView = "Modules";  // Default view
 
-    List<Module> modules = new();
-    List<User> participants = new();
+    IEnumerable<Module> modules = new List<Module>();
+    IEnumerable<ApplicationUser> participants = new List<ApplicationUser>();
 
     [SupplyParameterFromForm]
     public CourseDTO FormModel { get; set; } = new CourseDTO();
@@ -197,7 +202,7 @@
     {
         try
         {
-            modules = await HttpClient.GetFromJsonAsync<List<Module>>($"/api/Modules/Course/{courseId}") ?? new List<Module>();
+            modules = await ModuleRequestService.GetModulesByCourseIdAsync(courseId);
         }
         catch (Exception ex)
         {
@@ -212,8 +217,8 @@
     {
         try
         {
-            var allUsers = await HttpClient.GetFromJsonAsync<List<User>>("/api/users");
-            if (allUsers != null)
+            var allUsers = await ApplicationUserService.GetAsync();
+            if (allUsers.Any())
             {
                 participants = allUsers.Where(u => u.CourseID == courseId).ToList();
             }
@@ -228,7 +233,7 @@
     {
         try
         {
-            var course = await HttpClient.GetFromJsonAsync<Course>($"/api/Courses/{courseId}");
+            Course? course = await CourseRequestService.GetAsync(courseId);
             if (course != null)
             {
                 courseTitle = course.Title;
@@ -255,7 +260,7 @@
     //EDIT COURSE
     protected async Task HandleValidSubmit()
     {
-        var postBody = new
+        CourseDTO postBody = new CourseDTO
         {
             Id = courseId,
             Title = FormModel.Title,
@@ -264,7 +269,8 @@
             End = FormModel.End,
         };
 
-        var response = await HttpClient.PutAsJsonAsync($"/api/Courses/{courseId}", postBody);
+        var response = await CourseRequestService.UpdateAsync(courseId, postBody, default);
+        response = await HttpClient.PutAsJsonAsync($"/api/Courses/{courseId}", postBody);
         
         if (response.IsSuccessStatusCode)
         {
@@ -293,7 +299,9 @@
             if (response.IsSuccessStatusCode)
             {
                 //Remove the deleted module from the list so it disappears from the UI
-                modules.Remove(modules.Single(m => m.Id == moduleId));
+                var temp = modules.ToList();
+                temp.Remove(modules.Single(m => m.Id == moduleId));
+                modules = temp;
             }
         }
     }
