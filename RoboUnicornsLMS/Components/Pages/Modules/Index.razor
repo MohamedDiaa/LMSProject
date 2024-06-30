@@ -38,12 +38,19 @@
                     <td>@Module.Start</td>
                     <td>@Module.End</td>
                     <td>
-                        <NavLink class="btn btn-primary btn-sm" href="Module/Details/@Module.Id">Details</NavLink>
-                        <NavLink class="btn btn-success btn-sm" href="Module/Edit/@Module.Id">Edit</NavLink>
-                        <NavLink class="btn btn-danger btn-sm" href="Module/Delete/@Module.Id">Delete</NavLink>
+                        <NavLink href="@($"Module/Details/{Module.Id}")">Details</NavLink>
+                        <NavLink href="@($"Module/Edit/{Module.Id}")">Edit</NavLink>
+                        <NavLink href="@($"Module/Delete/{Module.Id}")">Delete</NavLink>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
 }

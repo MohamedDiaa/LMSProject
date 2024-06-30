@@ -35,9 +35,9 @@
                     <td>@user.UserName</td> <!-- Assuming UserName is the correct property -->
                     <td>@user.Email</td> <!-- Example adjustment -->
                     <td>
-                        <NavLink class="btn btn-primary btn-sm" href="ApplicationUser/Details/@user.Id">Details</NavLink>
-                        <NavLink class="btn btn-success btn-sm" href="ApplicationUser/Edit/@user.Id">Edit</NavLink>
-                        <NavLink class="btn btn-danger btn-sm" href="ApplicationUser/Delete/@user.Id">Delete</NavLink>
+                        <NavLink href="@($"ApplicationUser/Details/{user.Id}")">Details</NavLink>
+                        <NavLink href="@($"ApplicationUser/Edit/{user.Id}")">Edit</NavLink>
+                        <NavLink href="@($"ApplicationUser/Delete/{user.Id}")">Delete</NavLink>
                     </td>
                 </tr>
             }
@@ -48,6 +48,5 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        // Assuming Entities is correctly populated with ApplicationUser instances
     }
 }

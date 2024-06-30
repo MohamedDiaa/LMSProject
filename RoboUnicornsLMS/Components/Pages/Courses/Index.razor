@@ -38,12 +38,19 @@
                     <td>@course.Start</td>
                     <td>@course.End</td>
                     <td>
-                        <NavLink class="btn btn-primary btn-sm" href="Course/Details/@course.Id">Details</NavLink>
-                        <NavLink class="btn btn-success btn-sm" href="Course/Edit/@course.Id">Edit</NavLink>
-                        <NavLink class="btn btn-danger btn-sm" href="Course/Delete/@course.Id">Delete</NavLink>
+                        <NavLink href="@($"Course/Details/{course.Id}")">Details</NavLink>
+                        <NavLink href="@($"Course/Edit/{course.Id}")">Edit</NavLink>
+                        <NavLink href="@($"Course/Delete/{course.Id}")">Delete</NavLink>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
 }
