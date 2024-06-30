@@ -1,0 +1,58 @@
+﻿@page "/module/{ModuleId:int}/activities"
+@inject HttpClient HttpClient
+@rendermode InteractiveServer
+
+<h3>ListActivities</h3>
+
+<table class="table table-striped table-dark">
+
+    <tr>
+        <th>@nameof(Activity.Title)</th>
+        <th>@nameof(Activity.Description)</th>
+        <th>@nameof(Activity.Start)</th>
+        <th>@nameof(Activity.End)</th>
+    </tr>
+    <tbody>
+        @foreach (Activity activity in Activities)
+        {
+            <tr>
+                <td>
+                    <p style="min-width:250px">@activity.Title</p>
+                </td>
+                <td>
+                    <p>@activity.Description</p>
+                </td>
+                <td style="width:100px">
+                    <p>@activity.Start.ToShortDateString()</p>
+                </td>
+                <td style="width:100px">
+                    <p>@activity.End.ToShortDateString()</p>
+                </td>
+                @* <td>
+                    <a href="@($"moduleedit/{activity.Id}")" class="btn btn-primary">Edit</a>
+                    <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(activity.Id)">Delete</button>
+                    <a href="@($"module/{activity.Id}/activities")" class="btn btn-primary">View Activities</a>
+                </td> *@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public int ModuleId { get; set; }
+
+    public List<Activity> Activities = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Activities = await HttpClient.GetFromJsonAsync<List<Activity>>($"/api/Activities/module/{ModuleId}") ?? new List<Activity>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading modules: {ex.Message}");
+        }
+    }
+}

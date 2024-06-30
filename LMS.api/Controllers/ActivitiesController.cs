@@ -28,6 +28,12 @@ namespace LMS.api.Controllers
             return await _context.Activity.ToListAsync();
         }
 
+        [HttpGet("/module/{moduleId}")]
+        public async Task<ActionResult<IEnumerable<Activity>>> GetActivitiesByCourseId(int moduleId)
+        {
+            return await _context.Activity.Where(a => a.ModuleID == moduleId).ToListAsync();
+        }
+
         // GET: api/Activities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
