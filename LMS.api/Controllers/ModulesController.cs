@@ -106,7 +106,7 @@ namespace LMS.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Module>> PostModule(ModuleDTO @module)
         {
-            var @course = await _context.Course.FindAsync(@module.CourseID);
+            var @course = await _context.Course.FindAsync(@module.CourseId);
             if (@course == null)
             {
                 return NotFound();
