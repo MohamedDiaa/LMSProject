@@ -1,4 +1,7 @@
 ﻿@page "/module/{ModuleId:int}/activityadd"
+@using LMS.api.DTO
+@using RoboUnicornsLMS.Services
+@inject IActivityRequestService ActivityRequestService
 @inject HttpClient HttpClient
 @rendermode InteractiveServer
 
@@ -60,7 +63,7 @@ else
 
     private async Task OnSubmit()
     {
-        var postBody = new
+        ActivityCreateDTO postBody = new ActivityCreateDTO
         {
             Title = FormModel.Title,
             Description = FormModel.Description,
@@ -69,7 +72,8 @@ else
             ModuleID = ModuleId
         };
 
-        var response = await HttpClient.PostAsJsonAsync("/api/activities", postBody);
+        var response = await ActivityRequestService.CreateAsync<ActivityCreateDTO>(postBody);
+
         if (response.IsSuccessStatusCode)
         {
             StatusMessage = "Activity successfully added!";

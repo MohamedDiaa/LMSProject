@@ -63,7 +63,7 @@
 
     private List<User> users = new();
     private ConfirmationDialog DeleteDialog;
-    private int UserIdToDelete;
+    private string UserIdToDelete;
     private string UserNameToDelete;
     public string courseTitle = "Loading...";
 
@@ -72,7 +72,7 @@
         users = await HttpClient.GetFromJsonAsync<List<User>>("/api/users") ?? new();
     }
 
-    private void OpenDeleteDialog(int userId, string firstName, string lastName)
+    private void OpenDeleteDialog(string userId, string firstName, string lastName)
     {
         UserIdToDelete = userId;
         UserNameToDelete = $"{firstName} {lastName}";

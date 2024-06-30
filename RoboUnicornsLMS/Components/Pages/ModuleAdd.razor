@@ -1,6 +1,8 @@
 ﻿@page "/course/{CourseId:int}/moduleadd"
 @using LMS.api.Model
-@inject HttpClient HttpClient
+@using RoboUnicornsLMS.Services
+@using System.Net
+@inject IModuleRequestService ModuleRequestService
 
 <div class="col text-center">
     <h2>Add module</h2>
@@ -58,7 +60,7 @@
 
     private async Task OnSubmit()
     {
-        var postBody = new
+        ModuleDTO postBody = new ModuleDTO
         {
             Title = FormModel.Title,
             Description = FormModel.Description,
@@ -67,18 +69,15 @@
             CourseId = CourseId
         };
 
-      
-
-        var response = await HttpClient.PostAsJsonAsync("/api/modules", postBody);
+        HttpResponseMessage response = await ModuleRequestService.CreateAsync<ModuleDTO>(postBody);
         if (response.IsSuccessStatusCode)
         {
-            StatusMessage = "Module successfully created!";
+            StatusMessage = "Module added successfully";
             StatusMessageClass = "alert-success";
-            FormModel = new ModuleDTO(); // Reset form
         }
         else
         {
-            StatusMessage = "Error creating course. Please try again.";
+            StatusMessage = "Failed to add module";
             StatusMessageClass = "alert-danger";
         }
     }

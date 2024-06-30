@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace LMS.api.Model
+﻿namespace LMS.api.Model
 {
     public class ModuleDTO
     {
@@ -12,7 +10,7 @@ namespace LMS.api.Model
 
         public DateTime End { get; set; }
 
-        public int CourseID { get; set; }
+        public int CourseId { get; set; }
 
         public Course? Course { get; set; }
 

@@ -1,6 +1,9 @@
 ﻿@page "/moduleedit/{ModuleId:int}"
 @using LMS.api.Model
-@inject HttpClient HttpClient
+@using RoboUnicornsLMS.Services
+@inject IModuleRequestService ModuleRequestService
+@inject ICourseRequestService CourseRequestService
+@* @inject HttpClient HttpClient *@
 @rendermode InteractiveServer
 
 <div class="col text-center">
@@ -31,7 +34,7 @@
     </div>
 
     <div class="mb-3">
-        <InputSelect class="form-select" @bind-Value="@FormModel.CourseID">
+        <InputSelect class="form-select" @bind-Value="@FormModel.CourseId">
             @foreach(var course in Courses)
             {
                 <option value="@course.Id">@course.Title</option>
@@ -62,36 +65,43 @@
     private string StatusMessage { get; set; }
     private string StatusMessageClass { get; set; }
 
-    public List<Course> Courses { get; set; } = [];
+    public IEnumerable<Course> Courses { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
-        FormModel = await HttpClient.GetFromJsonAsync<ModuleDTO>($"/api/modules/{ModuleId}");
-        Courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses/");
+        FormModel = await ModuleRequestService.GetAsync<ModuleDTO>(ModuleId) ?? FormModel;
+        Courses = await CourseRequestService.GetAsync();
     }
 
     protected async Task HandleValidSubmit()
     {
-        var postBody = new
+        ModuleDTO postBody = new ModuleDTO
         {
             Id = ModuleId,
             Title = FormModel.Title,
             Description = FormModel.Description,
             Start = FormModel.Start,
             End = FormModel.End,
-            CourseId = FormModel.CourseID
+            CourseId = FormModel.CourseId
         };
 
-        var response = await HttpClient.PutAsJsonAsync($"/api/modules/{ModuleId}", postBody);
-        if (response.IsSuccessStatusCode)
+        try 
         {
-            StatusMessage = "Module successfully created! Please refresh to see the changes.";
-            StatusMessageClass = "alert-success";
-            
+            var response = await ModuleRequestService.UpdateAsync<ModuleDTO>(ModuleId, postBody);
+            if (response.IsSuccessStatusCode)
+            {
+                StatusMessage = "Module successfully created! Please refresh to see the changes.";
+                StatusMessageClass = "alert-success";
+
+            }
+            else
+            {
+                StatusMessage = "Error creating course. Please try again.";
+                StatusMessageClass = "alert-danger";
+            }
         }
-        else
-        {
-            StatusMessage = "Error creating course. Please try again.";
+        catch (Exception ex) {
+            StatusMessage = $"Error editing a module: {ex}<br/>Please try again.";
             StatusMessageClass = "alert-danger";
         }
     }
