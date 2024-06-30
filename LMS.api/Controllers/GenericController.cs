@@ -7,22 +7,22 @@ namespace LMS.api.Controllers
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ActivityController : GenericController<Activity, int>
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class ActivityController : GenericController<Activity>
     {
         public ActivityController(IGenericResponseService<Activity, int> service) : base(service) { }
     }
 
-    [ApiController]
-    [Route("api/[controller]")]
+    //[ApiController]
+    //[Route("api/[controller]")]
     public class CourseController : GenericController<Course, int>
     {
         public CourseController(IGenericResponseService<Course, int> service) : base(service) { }
     }
 
-    [ApiController]
-    [Route("api/[controller]")]
+    //[ApiController]
+    //[Route("api/[controller]")]
     public class ModuleController : GenericController<Module, int>
     {
         public ModuleController(IGenericResponseService<Module, int> service) : base(service) { }
@@ -42,6 +42,14 @@ namespace LMS.api.Controllers
         public TeacherController(IGenericResponseService<Teacher, string> service) : base(service) { }
     }
 
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class GenericController<TEntity> : GenericController<TEntity, int>
+        where TEntity : class, IEntity<int>
+    {
+        public GenericController(IGenericResponseService<TEntity, int> service) : base(service) { }
+    }
+
     [ApiController]
     [Route("api/[controller]")]
     public class GenericController<TEntity, TKey> : ControllerBase, IGenericController<TEntity, TKey>
@@ -58,14 +66,14 @@ namespace LMS.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TEntity>>> GetAll()
         {
-            var entities = await _service.GetAllAsync();
+            var entities = await _service.GetAsync();
             return Ok(entities);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TEntity>> Get(TKey id)
         {
-            var entity = await _service.GetByIdAsync(id);
+            var entity = await _service.GetAsync(id);
             if (entity == null)
             {
                 return NotFound();
@@ -95,7 +103,7 @@ namespace LMS.api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(TKey id)
         {
-            var entity = await _service.GetByIdAsync(id);
+            var entity = await _service.GetAsync(id);
             if (entity == null)
             {
                 return NotFound();

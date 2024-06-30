@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS.api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240629080544_IntroducingIdentity")]
-    partial class IntroducingIdentity
+    [Migration("20240630105056_FixApplicationUserIdIssue")]
+    partial class FixApplicationUserIdIssue
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,9 @@ namespace LMS.api.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -84,6 +87,8 @@ namespace LMS.api.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -412,6 +417,13 @@ namespace LMS.api.Migrations
                     b.Navigation("Module");
                 });
 
+            modelBuilder.Entity("LMS.api.Model.ApplicationRole", b =>
+                {
+                    b.HasOne("LMS.api.Model.ApplicationUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
             modelBuilder.Entity("LMS.api.Model.ApplicationUser", b =>
                 {
                     b.HasOne("LMS.api.Model.Course", "Course")
@@ -481,6 +493,11 @@ namespace LMS.api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LMS.api.Model.ApplicationUser", b =>
+                {
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("LMS.api.Model.Course", b =>
