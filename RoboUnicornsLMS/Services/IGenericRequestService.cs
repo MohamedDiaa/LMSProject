@@ -1,7 +1,4 @@
 ﻿using LMS.api.Model;
-using RoboUnicornsLMS.Services;
-using RoboUnicornsLMS;
-using System.Configuration;
 
 namespace RoboUnicornsLMS.Services
 {
@@ -17,6 +14,7 @@ namespace RoboUnicornsLMS.Services
     }
     public interface ICourseRequestService : IGenericRequestService<Course, int>
     {
+        Task<HttpResponseMessage> UpdateAsync(int id, CourseDTO entity, CancellationToken cancellation = default);
         Task<Course?> GetCourseForUserAsync(string userId, CancellationToken cancellation = default);
     }
     public interface IDocumentRequestService : IGenericRequestService<Document, int>
