@@ -55,14 +55,22 @@ namespace LMS.api.Controllers
         // PUT: api/Activities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivity(int id, Activity activity)
+        public async Task<IActionResult> PutActivity(int id, ActivityUpdateDTO activity)
         {
             if (id != activity.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(activity).State = EntityState.Modified;
+            var activityEntity = await _context.Activity.FindAsync(activity.Id);
+            if (activityEntity == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(activity, activityEntity);
+
+            _context.Entry(activityEntity).State = EntityState.Modified;
 
             try
             {
