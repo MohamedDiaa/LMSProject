@@ -21,7 +21,8 @@ namespace LMS.api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAutoMapper(typeof(ModuleMappings));
-            
+            builder.Services.AddAutoMapper(typeof(ActivityMappings));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
