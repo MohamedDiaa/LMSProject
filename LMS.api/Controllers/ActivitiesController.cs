@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
-using LMS.api.Data;
+using AutoMapper;
+using LMS.api.DTO;
 
 namespace LMS.api.Controllers
 {
@@ -14,11 +15,14 @@ namespace LMS.api.Controllers
     [ApiController]
     public class ActivitiesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly LMSContext _context;
 
-        public ActivitiesController(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+
+        public ActivitiesController(LMSContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Activities
@@ -82,12 +86,20 @@ namespace LMS.api.Controllers
         // POST: api/Activities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
+        public async Task<ActionResult<Activity>> PostActivity(ActivityCreateDTO activity)
         {
-            _context.Activity.Add(activity);
+            var module = await _context.Module.FindAsync(activity.ModuleID);
+            if (module == null)
+            {
+                return NotFound();
+            }
+
+            var finalActivity = _mapper.Map<Activity>(activity);
+
+            _context.Activity.Add(finalActivity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);
+            return CreatedAtAction("GetActivity", new { id = finalActivity.Id }, activity);
         }
 
         // DELETE: api/Activities/5
