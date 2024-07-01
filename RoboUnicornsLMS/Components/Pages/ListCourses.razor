@@ -1,6 +1,7 @@
 ﻿@page "/ListCourses"
+@using RoboUnicornsLMS.Services
 @rendermode InteractiveServer
-@inject HttpClient HttpClient
+@inject ICourseRequestService CourseRequestService
 
 <PageTitle>Courses</PageTitle>
 
@@ -43,7 +44,7 @@
                 </td>
                 <td style="width:100px">
                     <p>@x.End.ToShortDateString()</p>
-                </td
+                </td>
                 <td>
                    <a href="/ListModules/@x.Id" class="btn btn-primary">View</a>
                 </td>
@@ -51,16 +52,15 @@
     }
     </tbody>
 </table>
+
 @code {
 
-    List<Course> courses = new();
+    IEnumerable<Course> courses = new List<Course>();
 
     protected override async Task OnInitializedAsync()
     {
         // await HttpClient.GetAsync("/api/courses");
 
-        courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses") ?? new();
-
+        courses = await CourseRequestService.GetAsync();
     }
-
 }

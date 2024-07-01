@@ -24,3 +24,7 @@ header {
 .link-hover:hover {
     color: #23B0FF;
 }
+
+.navbar.navbar-expand-lg .container .nav-item .nav-link {
+    padding: 0.5rem 0.5rem !important;
+}

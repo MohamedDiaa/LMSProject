@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
+using LMS.api.Data;
 using AutoMapper;
 using LMS.api.DTO;
 
@@ -15,11 +16,12 @@ namespace LMS.api.Controllers
     [ApiController]
     public class ActivitiesController : ControllerBase
     {
-        private readonly LMSContext _context;
+        private readonly ApplicationDbContext _context;
 
         private readonly IMapper _mapper;
 
-        public ActivitiesController(LMSContext context, IMapper mapper)
+
+        public ActivitiesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

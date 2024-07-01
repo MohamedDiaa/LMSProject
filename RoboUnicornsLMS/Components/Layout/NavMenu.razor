@@ -1,32 +1,130 @@
-﻿      <header>
-            <div class="container">
-                <h1 class="display-4 robo">ROBO UNICORNS </h1>
-            </div>
-            
-       
+﻿@implements IDisposable
+@rendermode InteractiveServer
 
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@using RoboUnicornsLMS.Services
+
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">RoboUnicornsLMS</a>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+@if (isNavMenuExpanded)
+{
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        @*TODO: ADD COLLAPSABLE NAVBAR?*@
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                            <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">Home</span>
-                        </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="ListCourses">
-                            <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">Courses</span>
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="SchoolDirectory">
-                        <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">School Directory</span>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="ListCourses">
+                    <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">Courses</span>
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="SchoolDirectory">
+                    <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">School Directory</span>
                     @* TODO: ADD PROPER PAGE/LINK FOR SCHOOL DIRECTORY. THE VIEW FOR ALL STUDENTS. *@
-                    </NavLink>
-                </li>
-            </ul>
-       
-    </div>
-</nav>
-</header>
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="admin">
+                    <span class="bi bi-lock-nav-menu" aria-hidden="true">Admin Required</span>
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="teacher">
+                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true">Teacher Required</span>
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="student">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true">Student Required</span>
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="studentorteacher">
+                    <span class="bi bi-lock-nav-menu" aria-hidden="true">Either Student or Teacher Required</span>
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="any">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true">Any Role Required</span>
+                </NavLink>
+            </div>
+c
+            <AuthorizeView>
+                <Authorized>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Account/Manage">
+                            <span class="bi bi-person-fill-nav-menu" aria-hidden="true">@context.User.Identity?.Name</span>
+                        </NavLink>
+                    </div>
+                    <div class="nav-item px-3">
+                        <form action="Account/Logout" method="post">
+                            <AntiforgeryToken />
+                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                            <button type="submit" class="nav-link">
+                                <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true">Logout</span>
+                            </button>
+                        </form>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Account/Register">
+                            <span class="bi bi-person-nav-menu" aria-hidden="true">Register</span>
+                        </NavLink>
+                    </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Account/Login">
+                            <span class="bi bi-person-badge-nav-menu" aria-hidden="true">Login</span>
+                        </NavLink>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </nav>
+}
+
+@code {
+    private string? currentUrl;
+    private bool isNavMenuExpanded = true;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void ToggleNavMenu()
+    {
+        isNavMenuExpanded = !isNavMenuExpanded;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}
