@@ -4,7 +4,7 @@ namespace LMS.api.DTO
 {
     public class ActivityUpdateDTO
     {
-        [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required]

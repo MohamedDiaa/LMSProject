@@ -29,11 +29,10 @@
                 <td style="width:100px">
                     <p>@activity.End.ToShortDateString()</p>
                 </td>
-                @* <td>
-                    <a href="@($"moduleedit/{activity.Id}")" class="btn btn-primary">Edit</a>
-                    <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(activity.Id)">Delete</button>
-                    <a href="@($"module/{activity.Id}/activities")" class="btn btn-primary">View Activities</a>
-                </td> *@
+                <td>
+                    <a href="@($"activityedit/{activity.Id}")" class="btn btn-primary">Edit</a>
+                    @* <button type="button" class="btn btn-danger" @onclick="() => OpenDeleteDialog(activity.Id)">Delete</button> *@
+                </td>
             </tr>
         }
     </tbody>
