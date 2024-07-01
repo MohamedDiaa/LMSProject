@@ -114,7 +114,7 @@ namespace LMS.api.Controllers
             }
 
             var modules = await _context.Module.Where(m => m.CourseID == @module.CourseId).ToListAsync();
-            if (CheckDateOverlapping(module, modules))
+            if (CheckModuleDatesOverlapping(module, modules))
             {
                 return BadRequest();
             }
@@ -148,26 +148,17 @@ namespace LMS.api.Controllers
             return _context.Module.Any(e => e.Id == id);
         }
 
-        private bool Overlaps(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        private bool OverlappingDateTime(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
-            if (start1 >= start2 && end1 <= end2)
-                return true;
-            else if (start1 >= start2 && end1 >= end2)
-                return true;
-            else if (start1 <= start2 && end1 <= end2)
-                return true;
-            else
-                return false;
+            return (start1 >= start2) && (end2 <= end1);
         }
 
-        private bool CheckDateOverlapping(ModuleDTO module, List<Module> modules)
+        private bool CheckModuleDatesOverlapping(ModuleDTO module, List<Module> modules)
         {
             foreach (var m in modules)
             {
-                if (Overlaps(module.Start, module.End, m.Start, m.End))
-                {
+                if (OverlappingDateTime(module.Start, module.End, m.Start, m.End))
                     return true;
-                }
             }
             return false;
         }
