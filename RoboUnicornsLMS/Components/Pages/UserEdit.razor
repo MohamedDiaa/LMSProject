@@ -1,6 +1,9 @@
-﻿@page "/useredit/{UserId:int}"
+﻿@page "/useredit/{UserId}"
+@using LMS.api.DTO
 @using LMS.api.Model
-@inject HttpClient HttpClient
+@using RoboUnicornsLMS.Services
+@inject IApplicationUserRequestService ApplicationUserService
+@inject ICourseRequestService CourseRequestService
 @rendermode InteractiveServer
 
 <div class="container text-center">
@@ -27,7 +30,7 @@
 
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <InputText class="form-control" @bind-Value="@FormModel.Password" placeholder="Enter Password"></InputText>
+        <InputText class="form-control" @bind-Value="@FormModel.PasswordHash" placeholder="Enter Password"></InputText>
     </div>
 
     <div class="mb-3">
@@ -53,33 +56,33 @@
 
 @code {
     [Parameter]
-    public int UserId { get; set; }
+    public string UserId { get; set; }
 
-    public User FormModel { get; set; } = new User();
+    public ApplicationUser FormModel { get; set; } = new();
 
-    public List<Course> Courses { get; set; } = new();
+    public IEnumerable<Course> Courses { get; set; } = new List<Course>();
     private string StatusMessage { get; set; }
     private string StatusMessageClass { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        FormModel = await HttpClient.GetFromJsonAsync<User>($"/api/users/{UserId}");
-        Courses = await HttpClient.GetFromJsonAsync<List<Course>>("/api/courses/");
+        FormModel = await ApplicationUserService.GetAsync<ApplicationUser>(UserId);
+        Courses = await CourseRequestService.GetAsync();
     }
 
     protected async Task HandleValidSubmit()
     {
-        var postBody = new
+        UpdateUserDto postBody = new UpdateUserDto
         {
             Id = UserId,
             FirstName = FormModel.FirstName,
             LastName = FormModel.LastName,
             Email = FormModel.Email,
-            Password = FormModel.Password,
-            CourseID = FormModel.CourseID
+            Password = FormModel.PasswordHash,
+            CourseId = FormModel.CourseID
         };
 
-        var response = await HttpClient.PutAsJsonAsync($"/api/users/{UserId}", postBody);
+        var response = await ApplicationUserService.UpdateAsync<UpdateUserDto>(UserId, postBody);
         if (response.IsSuccessStatusCode)
         {
             StatusMessage = "User successfully updated! Please refresh to see the changes.";

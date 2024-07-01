@@ -1,23 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace LMS.api.Model
 {
-    public class User
+    public class User : IdentityUser, IEntity<string>
     {
-        [Key]
-        public int Id { get; set; }
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public string LastName { get; set; }
+        public string Name => $"{FirstName.ToUpperInvariant()} {LastName.ToUpperInvariant()}";
+        public string SearchableString => $"{Name.ToUpperInvariant()} {Id}";
 
-        public string Email { get; set; }
-
-       // [JsonIgnore]
-        public string Password { get; set; }
-        
+        // Navigation properties
         public int? CourseID { get; set; }
-
         [JsonIgnore]
         public Course? Course { get; set; }
     }

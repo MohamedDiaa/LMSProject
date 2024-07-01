@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
+using LMS.api.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace LMS.api.Controllers
 {
@@ -13,49 +15,53 @@ namespace LMS.api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly LMSContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public UsersController(LMSContext context)
+        public UsersController(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUser([FromQuery] bool includeRoles = true)
         {
-            return await _context.User.ToListAsync();
+            IQueryable<ApplicationUser> users = _userManager.Users;
+            if (includeRoles)
+            {
+                users = users.Include(u => u.Roles);
+            }
+            return Ok(await Task.FromResult(users));
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser(string id)
         {
-            var user = await _context.User.FindAsync(id);
-
+            var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-
-            return user;
+            return Ok(user);
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(string id, ApplicationUser user)
         {
-            if (id != user.Id)
+            if (id.Equals(user.Id))
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _userManager.UpdateAsync(user);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -75,33 +81,85 @@ namespace LMS.api.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(ApplicationUser user)
         {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
-
+            var result = await _userManager.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
+            await _userManager.DeleteAsync(user);
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        // Get roles of a user
+        [HttpGet("{userId}/roles")]
+        public async Task<ActionResult<IEnumerable<string>>> GetUserRoles(string id)
         {
-            return _context.User.Any(e => e.Id == id);
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(roles);
+        }
+
+        // Add a role to a user
+        [HttpPost("{id}/roles")]
+        public async Task<IActionResult> AddUserRole(string id, [FromBody] string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                return BadRequest("Role does not exist");
+            }
+            var result = await _userManager.AddToRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/roles")]
+        public async Task<IActionResult> RemoveUserRole(string id, [FromBody] string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return NoContent();
+        }
+
+        private bool UserExists(string id)
+        {
+            return _userManager.Users.Any(e => e.Id.Equals(id));
         }
     }
 }
