@@ -9,10 +9,58 @@
 @inject ILogger<Login> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
+@rendermode InteractiveServer
 
 <PageTitle>Log in</PageTitle>
+<div class="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="container-fluid vh-70 d-flex align-items-center justify-content-center">
+        <form class="p-5 d-flex flex-column align-items-center justify-content-between" style="max-width: 600px; background-color:#212529 ; border: 2px solid #1861ac;">
+            <div class="text-center mb-4">
+                <h2 class="mb-3">LOG IN</h2>
+            </div>
 
-<h1>Log in</h1>
+            <section>
+                <StatusMessage Message="@errorMessage" />
+                <EditForm Model="Input" OnValidSubmit="LoginUser">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger" role="alert" />
+                    <div class="form-floating mb-3">
+                        <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label for="email" class="text-primary">Email</label>
+                        <ValidationMessage For="() => Input.Email" class="text-danger" />
+                    </div>
+                    <div class="form-floating mb-3">
+                        <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label for="password" class="text-primary">Password</label>
+                        <ValidationMessage For="() => Input.Password" class="text-danger" />
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label class="form-label">
+                            <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
+                            Remember me
+                        </label>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    </div>
+                    <div>
+                        <p>
+                            <a href="Account/ForgotPassword">Forgot your password?</a>
+                        </p>
+                        <p>
+                            <a href="@(NavigationManager.GetUriWithQueryParameters("Account/Register", new Dictionary<string, object?> { ["ReturnUrl"] = ReturnUrl }))">Register as a new user</a>
+                        </p>
+                        <p>
+                            <a href="Account/ResendEmailConfirmation">Resend email confirmation</a>
+                        </p>
+                    </div>
+                </EditForm>
+            </section>
+        </form>
+    </div>
+</div>
+
+@*@<h1>Log in</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
@@ -63,7 +111,7 @@
         </section>
     </div>
 </div>
-
+*@
 @code {
     private string? errorMessage;
 

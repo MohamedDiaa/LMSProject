@@ -16,10 +16,57 @@
 @inject IdentityRedirectManager RedirectManager
 
 <PageTitle>Register</PageTitle>
+<div class="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="container-fluid vh-70 d-flex align-items-center justify-content-center">
+        <form class="p-5 d-flex flex-column align-items-center justify-content-between" style="max-width: 600px; background-color: #212529; border: 2px solid #1861ac;">
+            <div class="text-center mb-4">
+                <h2 class="mb-3">Register</h2>
+            </div>
+            <StatusMessage Message="@Message" />
+            <EditForm Model="Input" asp-route-returnUrl="@ReturnUrl" method="post" OnValidSubmit="RegisterUser" FormName="register">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
 
-<h1>Register</h1>
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label for="email" class="text-primary">Email</label>
+                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+                </div>
 
+                <div class="form-floating mb-3">
+                    <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label for="password" class="text-primary">Password</label>
+                    <ValidationMessage For="() => Input.Password" class="text-danger" />
+                </div>
 
+                <div class="form-floating mb-3">
+                    <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label for="confirm-password" class="text-primary">Confirm Password</label>
+                    <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
+                </div>
+
+                <div class="form-check mb-3">
+                    <InputCheckbox @bind-Value="Input.IsAdmin" class="form-check-input" />
+                    <label class="form-check-label" for="isAdmin">Admin Role</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <InputCheckbox @bind-Value="Input.IsTeacher" class="form-check-input" />
+                    <label class="form-check-label" for="isTeacher">Teacher Role</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <InputCheckbox @bind-Value="Input.IsStudent" class="form-check-input" />
+                    <label class="form-check-label" for="isStudent">Student Role</label>
+                </div>
+
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            </EditForm>
+        </form>
+    </div>
+</div>
+
+@*<h1>Register</h1>
 <div class="row">
     <div class="col-md-4">
         <StatusMessage Message="@Message" />
@@ -30,17 +77,17 @@
             <ValidationSummary class="text-danger" role="alert" />
             <div class="form-floating mb-3">
                 <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label for="email">Email</label>
+                <label for="email" class="text-primary">Email</label>
                 <ValidationMessage For="() => Input.Email" class="text-danger" />
             </div>
             <div class="form-floating mb-3">
                 <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label for="password">Password</label>
+                <label for="password" class="text-primary">Password</label>
                 <ValidationMessage For="() => Input.Password" class="text-danger" />
             </div>
             <div class="form-floating mb-3">
                 <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label for="confirm-password">Confirm Password</label>
+                <label for="confirm-password" class="text-primary">Confirm Password</label>
                 <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
             </div>
             <div class="form-check mb-3">
@@ -65,7 +112,7 @@
             <ExternalLoginPicker />
         </section>
     </div>
-</div>
+</div>*@
 
 @code {
     private IEnumerable<IdentityError>? identityErrors;
