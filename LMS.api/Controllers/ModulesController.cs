@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LMS.api.Model;
 using AutoMapper;
 using LMS.api.Data;
+using LMS.api.Services;
 
 namespace LMS.api.Controllers
 {
@@ -112,6 +113,12 @@ namespace LMS.api.Controllers
                 return NotFound();
             }
 
+            var modules = await _context.Module.Where(m => m.CourseID == @module.CourseId).ToListAsync();
+            if (CheckDateOverlapping(module, modules))
+            {
+                return BadRequest();
+            }
+
             var finalModule = _mapper.Map<Module>(@module);
 
             _context.Module.Add(finalModule);
@@ -139,6 +146,30 @@ namespace LMS.api.Controllers
         private bool ModuleExists(int id)
         {
             return _context.Module.Any(e => e.Id == id);
+        }
+
+        private bool Overlaps(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        {
+            if (start1 >= start2 && end1 <= end2)
+                return true;
+            else if (start1 >= start2 && end1 >= end2)
+                return true;
+            else if (start1 <= start2 && end1 <= end2)
+                return true;
+            else
+                return false;
+        }
+
+        private bool CheckDateOverlapping(ModuleDTO module, List<Module> modules)
+        {
+            foreach (var m in modules)
+            {
+                if (Overlaps(module.Start, module.End, m.Start, m.End))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

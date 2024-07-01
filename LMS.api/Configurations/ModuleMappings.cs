@@ -7,6 +7,7 @@ namespace LMS.api.Configurations
     {
         public ModuleMappings()
         {
+            CreateMap<Module, ModuleDTO>();
             CreateMap<Module, ModuleDTO>().ReverseMap();
         }
     }
