@@ -38,10 +38,10 @@
             NavigationManager.NavigateTo("/account/login");
         }
 
-        Users = await UserRequestService.GetAsync();
-        Activities = await ActivityRequestService.GetAsync();
-        Courses = await CourseRequestService.GetAsync();
-        Modules = await ModuleRequestService.GetAsync();
+        // Users = await UserRequestService.GetAsync();
+        // Activities = await ActivityRequestService.GetAsync();
+        // Courses = await CourseRequestService.GetAsync();
+        // Modules = await ModuleRequestService.GetAsync();
     }
 }
 
@@ -55,8 +55,7 @@
     }
 }
 
-@* Generate code snippets to display 10 random entities (Users, Activities, Courses, Modules) and add buttons to Create, Read, Update and Delete . *@
-@if (Users != null && Users.Any())
+@* @if (Users != null && Users.Any())
 {
     <h2>Users</h2>
     <table class="table table-striped table-dark">
@@ -181,3 +180,4 @@
 }
 
 
+ *@
