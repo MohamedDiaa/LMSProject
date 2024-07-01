@@ -1,4 +1,6 @@
 ﻿@page "/SchoolDirectory"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @using RoboUnicornsLMS.Services
 @inject IApplicationUserRequestService ApplicationUserRequestService
 @rendermode InteractiveServer

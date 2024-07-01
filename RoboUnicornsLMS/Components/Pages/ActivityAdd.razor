@@ -1,4 +1,6 @@
 ﻿@page "/module/{ModuleId:int}/activityadd"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @using LMS.api.DTO
 @using RoboUnicornsLMS.Services
 @inject IActivityRequestService ActivityRequestService

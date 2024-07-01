@@ -1,9 +1,10 @@
 ﻿@page "/moduleedit/{ModuleId:int}"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @using LMS.api.Model
 @using RoboUnicornsLMS.Services
 @inject IModuleRequestService ModuleRequestService
 @inject ICourseRequestService CourseRequestService
-@* @inject HttpClient HttpClient *@
 @rendermode InteractiveServer
 
 <div class="col text-center">

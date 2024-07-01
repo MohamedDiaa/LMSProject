@@ -1,4 +1,7 @@
 ﻿@page "/CreateUser"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
+@using RoboUnicornsLMS.Services
 @rendermode InteractiveServer
 @inject ICourseRequestService CourseRequestService
 @inject IApplicationUserRequestService UserRequestService

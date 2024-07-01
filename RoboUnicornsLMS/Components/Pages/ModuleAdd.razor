@@ -1,4 +1,6 @@
 ﻿@page "/course/{CourseId:int}/moduleadd"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @using LMS.api.Model
 @using RoboUnicornsLMS.Services
 @using System.Net

@@ -1,4 +1,6 @@
 ﻿@page "/useredit/{UserId}"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @using LMS.api.DTO
 @using LMS.api.Model
 @using RoboUnicornsLMS.Services

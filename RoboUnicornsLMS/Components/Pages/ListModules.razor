@@ -1,4 +1,6 @@
 ﻿@page "/ListModules/{courseId:int}"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
 @inject IApplicationUserRequestService ApplicationUserService
 @inject ICourseRequestService CourseRequestService
