@@ -31,7 +31,10 @@
         {
             userName = user.Identity.Name;
             var appUser = await UserManager.FindByNameAsync(userName);
+            if(appUser != null) {
             userRoles = await UserManager.GetRolesAsync(appUser);
+            }
+        
         }
         else
         {
