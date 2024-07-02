@@ -6,17 +6,17 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
-<div class="container col text-center">
+<div class="container">
     <header>
-        <h2 class="display-4">Add course</h2>
+        <h2 class="text-center">Add course</h2>
     </header>
     <EditForm Model="@FormModel" OnValidSubmit="@(async () => await OnValidSubmit())">
         <DataAnnotationsValidator />
         <AntiforgeryToken />
         <ValidationSummary />
 
-        <div class="form-floating mb-3">
-            <label for="titleInput">Title</label>
+        <div class="mb-3">
+            <label class="form-label for="titleInput">Title</label>
             <InputText id="titleInput" class="form-control" @bind-Value="@FormModel.Title" placeholder="Enter title" />
             <ValidationMessage For="@(() => FormModel.Title)" />
         </div>
@@ -44,7 +44,6 @@
             <InputNumber id="maxparticipantsInput" class="form-control" @bind-Value="@FormModel.MaxCapcity" placeholder="Enter max participants"></InputNumber>
             <ValidationMessage For="@(() => FormModel.MaxCapcity)" />
         </div>
-        <div class="mb-3"><p>@(isSubmitting ? "Submitting" : "Not Submitting")</p></div>
         <div class="mb-3">
             <button type="submit" disable="@isSubmitting" class="btn btn-primary">Add Course</button>
         </div>
