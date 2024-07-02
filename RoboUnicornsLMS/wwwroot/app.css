@@ -61,21 +61,18 @@ label {
     color:black;
 }
 
-
+/*For floating forms */
+.form-floating .form-label {
+    color: black;
+}
+/* For regular forms */
+.form-label {
+    color: white;
+}
 /*for checkbooxes*/
 .form-check-label {
     color: white;
 }
-
-.form-label {
-    color: white;
-}
-
-.form-floating .form-label {
-    color: black;
-}
-
-
 
 a {
     text-decoration:none;
