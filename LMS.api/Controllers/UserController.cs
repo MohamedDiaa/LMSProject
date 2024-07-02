@@ -1,5 +1,6 @@
 ﻿using LMS.api.DTO;
 using LMS.api.Model;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,30 +55,6 @@ namespace LMS.api.Controllers
                 return BadRequest(result.Errors);
             }
             return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-        }
-
-        // Update an existing user
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDto userDto)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            user.Id = userDto.Id;
-            user.FirstName = userDto.FirstName;
-            user.LastName = userDto.LastName;
-            user.Email = userDto.Email;
-            user.UserName = userDto.UserName;
-            user.CourseID = userDto.CourseId;
-
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-            return NoContent();
         }
 
         // Delete a user

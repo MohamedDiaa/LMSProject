@@ -1,9 +1,12 @@
 ﻿using LMS.api.Data;
+using LMS.api.DTO;
 using LMS.api.Model;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,30 +68,26 @@ namespace LMS.api.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Update an existing user
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, ApplicationUser user)
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDto userDto)
         {
-            if (id.Equals(user.Id))
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
+            user.Id = userDto.Id;
+            user.FirstName = userDto.FirstName ?? user.FirstName;
+            user.LastName = userDto.LastName ?? user.LastName;
+            user.Email = userDto.Email ?? user.Email;
+            user.CourseID = userDto.CourseId;
 
-            try
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
             {
-                await _userManager.UpdateAsync(user);
+                return BadRequest(result.Errors);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return NoContent();
         }
 
