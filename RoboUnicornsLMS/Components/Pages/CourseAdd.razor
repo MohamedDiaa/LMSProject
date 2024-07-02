@@ -1,4 +1,6 @@
 ﻿@page "/CourseAdd"
+@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
 @inject HttpClient HttpClient
 
@@ -8,8 +10,8 @@
 <form method="post" data-enhance @onsubmit="OnSubmit" @formname="add-module-form">
     <AntiforgeryToken />
 
-    <div class="form-floating mb-3">
-        <label for="floatingInput">Title</label>
+    <div class="mb-3">
+        <label class="form-label">Title</label>
         <InputText class="form-control" @bind-Value="@FormModel.Title" placeholder="Enter title" />
     </div>
 
