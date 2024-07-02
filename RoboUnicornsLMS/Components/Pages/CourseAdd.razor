@@ -1,5 +1,5 @@
 ﻿@page "/CourseAdd"
-@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@attribute [Authorize(Policy = ApplicationPolicy.RequireTeacherRole)]
 @using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
 @inject HttpClient HttpClient

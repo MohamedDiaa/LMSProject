@@ -1,5 +1,5 @@
 ﻿@page "/SchoolDirectory"
-@attribute [Authorize(Policy = ApplicationPolicy.RequireAnyRole)]
+@attribute [Authorize(Policy = ApplicationPolicy.RequireTeacherRole)]
 @using Microsoft.AspNetCore.Authorization
 @using RoboUnicornsLMS.Services
 @inject IApplicationUserRequestService ApplicationUserRequestService
