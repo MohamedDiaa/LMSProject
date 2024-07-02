@@ -1,6 +1,7 @@
 @implements IDisposable
 @rendermode InteractiveServer
 
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
@@ -28,6 +29,7 @@
                         </span>
                     </NavLink>
                 </li>
+  
                 <li class="nav-item">
                     <NavLink class="nav-link" href="SchoolDirectory">
                         <span class="bi bi-list-nested-nav-menu link-hover" aria-hidden="true">

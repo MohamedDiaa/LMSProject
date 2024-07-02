@@ -60,3 +60,15 @@ h1:focus {
 label {
     color:black;
 }
+
+.form-check-label {
+    color: black;
+}
+
+.form-label {
+    color: white;
+}
+
+a {
+    text-decoration:none;
+}
