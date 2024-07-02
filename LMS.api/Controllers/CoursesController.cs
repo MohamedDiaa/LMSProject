@@ -79,7 +79,10 @@ namespace LMS.api.Controllers
                 {
                     course.Description = updateCourse.Description;
                 }
-                course.MaxCapcity = updateCourse.MaxCapacity.Value;
+                if (updateCourse.MaxCapacity == null)
+                    course.MaxCapcity = 0; // Dirty hack to avoid null value exception
+                else
+                    course.MaxCapcity = updateCourse.MaxCapacity.Value;
 
                 if (updateCourse.Start == null)
                 {
