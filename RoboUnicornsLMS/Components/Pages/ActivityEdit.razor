@@ -39,7 +39,7 @@
             <InputSelect class="form-control" @bind-Value="@FormModel.ModuleID">
                 @foreach (var module in Modules)
                 {
-                    <option value="@module.Id">@module.Description</option>
+                    <option value="@module.Id">@module.Title</option>
                 }
             </InputSelect>
         </div>
