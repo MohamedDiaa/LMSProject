@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using LMS.api.Data;
+using LMS.api.DTO;
+using LMS.api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LMS.api.Model;
-using LMS.api.Data;
-using AutoMapper;
-using LMS.api.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LMS.api.Controllers
 {
@@ -37,21 +37,36 @@ namespace LMS.api.Controllers
         [HttpGet("/module/{moduleId}")]
         public async Task<ActionResult<IEnumerable<Activity>>> GetActivitiesByCourseId(int moduleId)
         {
-            return await _context.Activity.Where(a => a.ModuleID == moduleId).ToListAsync();
+            try
+            {
+                var activities = await _context.Activity.Where(a => a.ModuleID == moduleId).ToListAsync();
+                return activities;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET: api/Activities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-            var activity = await _context.Activity.FindAsync(id);
-
-            if (activity == null)
+            try
             {
-                return NotFound();
-            }
+                var activity = await _context.Activity.FindAsync(id);
 
-            return activity;
+                if (activity == null)
+                {
+                    return NotFound();
+                }
+
+                return activity;
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/Activities/5
@@ -64,32 +79,38 @@ namespace LMS.api.Controllers
                 return BadRequest();
             }
 
-            var activityEntity = await _context.Activity.FindAsync(activity.Id);
-            if (activityEntity == null)
-            {
-                return NotFound();
-            }
-
-            _mapper.Map(activity, activityEntity);
-
-            _context.Entry(activityEntity).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActivityExists(id))
+                var activityEntity = await _context.Activity.FindAsync(activity.Id);
+                if (activityEntity == null)
                 {
                     return NotFound();
                 }
-                else
+
+                _mapper.Map(activity, activityEntity);
+
+                _context.Entry(activityEntity).State = EntityState.Modified;
+
+                try
                 {
-                    throw;
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActivityExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
             return NoContent();
         }
 
@@ -98,34 +119,48 @@ namespace LMS.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Activity>> PostActivity(ActivityCreateDTO activity)
         {
-            var module = await _context.Module.FindAsync(activity.ModuleID);
-            if (module == null)
+            try
             {
-                return NotFound();
+                var module = await _context.Module.FindAsync(activity.ModuleID);
+                if (module == null)
+                {
+                    return NotFound();
+                }
+
+                var finalActivity = _mapper.Map<Activity>(activity);
+
+                _context.Activity.Add(finalActivity);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetActivity", new { id = finalActivity.Id }, activity);
             }
-
-            var finalActivity = _mapper.Map<Activity>(activity);
-
-            _context.Activity.Add(finalActivity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetActivity", new { id = finalActivity.Id }, activity);
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/Activities/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(int id)
         {
-            var activity = await _context.Activity.FindAsync(id);
-            if (activity == null)
+            try
             {
-                return NotFound();
+                var activity = await _context.Activity.FindAsync(id);
+                if (activity == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Activity.Remove(activity);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Activity.Remove(activity);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         private bool ActivityExists(int id)
@@ -137,14 +172,21 @@ namespace LMS.api.Controllers
         [HttpGet("Module/{id}")]
         public async Task<ActionResult<IEnumerable<Activity>>> GetActivitiesByModuleID(int id)
         {
-            var @activties = await _context.Activity.Where(m => m.ModuleID == id).ToListAsync();
-
-            if (activties == null)
+            try
             {
-                return NotFound();
-            }
+                var @activties = await _context.Activity.Where(m => m.ModuleID == id).ToListAsync();
 
-            return activties;
+                if (activties == null)
+                {
+                    return NotFound();
+                }
+
+                return activties;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

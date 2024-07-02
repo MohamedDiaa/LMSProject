@@ -7,23 +7,37 @@ namespace LMS.api.Model
     public class Course : IDatableEntity
     {
         public int Id { get; set; }
-        public DateTime Created { get; set; } = DateTime.UtcNow;
-        public DateTime LastModified { get; set; } = DateTime.UtcNow;
-        public DateTime Start { get; set; } = DateTime.Today;
-        public DateTime End { get; set; } = DateTime.Today.AddMonths(1);
+
+        [Required(ErrorMessage = "The title is required.")]
+        [MaxLength(100, ErrorMessage = "The title must be 100 characters or less.")]
+        [MinLength(3, ErrorMessage = "The title must be at least 3 characters.")]
+        public string Title { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
-        public string Title { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "The description is required.")]
+        [MaxLength(500, ErrorMessage = "The description must be 500 characters or less.")]
+        [MinLength(3, ErrorMessage = "The description must be at least 3 characters.")]
         public string Description { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "The start date is required.")]
+        public DateTime Start { get; set; } = DateTime.Today;
+
+        [Required(ErrorMessage = "The end date is required.")]
+        public DateTime End { get; set; } = DateTime.Today.AddMonths(1);
+
+        [Required(ErrorMessage = "The maximum capacity is required.")]
+        [Range(1, 100, ErrorMessage = "The maximum capacity must be between 1 and 100.")]
         public int MaxCapcity { get; set; }
+        public DateTime LastModified { get; set; }
+        public DateTime Created { get; set; }
 
-        public string SearchableString => $"{Name} {Id}";
+        public string SearchableString => $"{Title} {Id}";
 
         [JsonIgnore]
-        public ICollection<ApplicationUser> Students { get; set; }
+        public ICollection<ApplicationUser> Students { get; set; } = new List<ApplicationUser>();
 
         [JsonIgnore]
-        public ICollection<Module> Modules { get; set; }
-
+        public ICollection<Module> Modules { get; set; } = new List<Module>();
     }
 }

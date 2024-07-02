@@ -1,12 +1,12 @@
 ﻿namespace LMS.api.DTO
 {
-    public class UpdateCourse
+    public class UpdateCourseDto
     {
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        public int? MaxCapcity { get; set; }
+        public int? MaxCapacity { get; set; }
 
         public DateTime? Start { get; set; }
 

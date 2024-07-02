@@ -1,6 +1,7 @@
 ﻿using LMS.api.Data;
 using LMS.api.DTO;
 using LMS.api.Model;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,67 +32,94 @@ namespace LMS.api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
-            var course = await _context.Course.FindAsync(id);
-
-            if (course == null)
+            try
             {
-                return NotFound();
-            }
+                var course = await _context.Course.FindAsync(id);
 
-            return course;
+                if (course == null)
+                {
+                    return NotFound();
+                }
+
+                return course;
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, UpdateCourse updateCourse)
+        public async Task<IActionResult> PutCourse(int id, UpdateCourseDto updateCourse)
         {
             if (id != updateCourse.Id)
             {
                 return BadRequest();
             }
 
-            var course = await _context.Course.FindAsync(id);
-
-            if (!String.IsNullOrEmpty(updateCourse.Title))
-            {
-                course.Title = updateCourse.Title;
-            }
-            if (!String.IsNullOrEmpty(updateCourse.Description))
-            {
-                course.Description = updateCourse.Description;
-            }
-            if (updateCourse.MaxCapcity is int maxCapcity)
-            {
-                course.MaxCapcity = maxCapcity;
-            }
-            if (updateCourse.Start is DateTime start)
-            {
-                course.Start = start;
-            }
-            if (updateCourse.End is DateTime end)
-            {
-                course.End = end;
-            }
-
-            _context.Entry(course).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
+                var course = await _context.Course.FindAsync(id);
+                List<string> errors = new List<string>();
+                if (String.IsNullOrEmpty(updateCourse.Title))
                 {
-                    return NotFound();
+                    errors.Add("Title is required");
                 }
                 else
                 {
-                    throw;
+                    course.Title = updateCourse.Title;
+                }
+                if (String.IsNullOrEmpty(updateCourse.Description))
+                {
+                    errors.Add("Description is required");
+                }
+                else
+                {
+                    course.Description = updateCourse.Description;
+                }
+                course.MaxCapcity = updateCourse.MaxCapacity.Value;
+
+                if (updateCourse.Start == null)
+                {
+                    errors.Add("Start is required");
+                }
+                else
+                {
+                    course.Start = updateCourse.Start.Value;
+                }
+                if (updateCourse.End == null)
+                {
+                    errors.Add("End is required");
+                }
+                else
+                {
+                    course.End = updateCourse.End.Value;
+                }
+
+                _context.Entry(course).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CourseExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
             return NoContent();
         }
 
@@ -109,26 +137,34 @@ namespace LMS.api.Controllers
 
         //New POST method because module and student was required in the above. 
         [HttpPost]
-        public async Task<ActionResult<CourseDTO>> PostCourse(CourseDTO courseDto)
+        public async Task<ActionResult<CourseDTO>> PostCourse(CourseCreateDTO createDto)
         {
 
 
             var course = new Course
             {
-                Title = courseDto.Title,
-                Description = courseDto.Description,
-                MaxCapcity = courseDto.maxCapcity,
-                Start = courseDto.Start,
-                End = courseDto.End,
-
+                Name = createDto.Title,
+                Title = createDto.Title,
+                Description = createDto.Description,
+                MaxCapcity = createDto.MaxCapacity,
+                Start = createDto.Start,
+                End = createDto.End,
             };
 
-            _context.Course.Add(course);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Course.Add(course);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
             // Map back to CourseDTO if needed
             var createdCourseDto = new CourseDTO
             {
+                Id = course.Id,
                 Title = course.Title,
                 Description = course.Description,
                 maxCapcity = course.MaxCapcity,
@@ -143,14 +179,21 @@ namespace LMS.api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            var course = await _context.Course.FindAsync(id);
-            if (course == null)
+            try
             {
-                return NotFound();
-            }
+                var course = await _context.Course.FindAsync(id);
+                if (course == null)
+                {
+                    return NotFound();
+                }
 
-            _context.Course.Remove(course);
-            await _context.SaveChangesAsync();
+                _context.Course.Remove(course);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return NoContent();
         }
@@ -164,20 +207,27 @@ namespace LMS.api.Controllers
         [HttpGet("User/{id}")]
         public async Task<ActionResult<Course>> GetCourseForUser(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _userManager.FindByIdAsync(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var course = await _context.Course.FindAsync(user.CourseID);
+
+                if (course == null)
+                {
+                    return NotFound();
+                }
+                return course;
             }
-
-            var course = await _context.Course.FindAsync(user.CourseID);
-
-            if (course == null)
+            catch (System.Exception e)
             {
-                return NotFound();
+                return BadRequest(e.Message);
             }
-            return course;
         }
     }
 }
